@@ -1,5 +1,7 @@
 package chat.server;
 
+import chat.messages.ClientMessage;
+
 import java.io.*;
 import java.net.*;
 
@@ -9,16 +11,16 @@ public class ClientThread implements Runnable {
 	private Socket socket;
 	private Server server;
 
-	private PrintWriter         output;
-	private BufferedInputStream input;
+	private ObjectOutputStream output;
+	private ObjectInputStream  input;
 
 	public ClientThread(Socket socket, Server server) {
 		this.socket = socket;
 		this.server = server;
 
 		try {
-			this.output = new PrintWriter(socket.getOutputStream());
-			this.input  = new BufferedInputStream(socket.getInputStream());
+			this.output = new ObjectOutputStream(socket.getOutputStream());
+			this.input  = new ObjectInputStream(socket.getInputStream());
 		}
 		catch(IOException e) {
 			e.printStackTrace();
@@ -32,8 +34,8 @@ public class ClientThread implements Runnable {
 		System.out.println("Nouveau client!");
 		try {
 			while(true) {
-				String message = this.read();
-				System.out.println("'" + message + "'");
+				ClientMessage message = this.read();
+				System.out.println(message.toString());
 			}
 		}
 		catch(IOException e) {
@@ -42,12 +44,13 @@ public class ClientThread implements Runnable {
 	}
 
 
-	private String read() throws IOException{
-		String message = "";
-		byte[] b = new byte[4096];
-		int stream = input.read(b);
-		message = new String(b, 0, stream);
-		return message;
+	private ClientMessage read() throws IOException {
+		try {
+			return (ClientMessage) input.readObject();
+		}
+		catch(ClassNotFoundException e) {
+			return null;
+		}
 	}
 
 }

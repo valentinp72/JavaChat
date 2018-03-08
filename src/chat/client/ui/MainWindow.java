@@ -1,8 +1,8 @@
 package chat.client.ui;
 
 import chat.client.Client;
-import chat.ClientMessage;
-
+import chat.messages.ClientMessage;
+import chat.messages.ClientMessageMessage;
 
 import javax.swing.JFrame;
 import java.awt.BorderLayout;
@@ -59,8 +59,11 @@ public class MainWindow extends JFrame {
 	}
 
 	public boolean sendMessage(String message) {
-		if(this.client != null)
-			return this.client.send(ClientMessage.SEND_MESSAGE, message);
+		if(this.client != null) {
+			ClientMessageMessage toSend = new ClientMessageMessage(message);
+			return this.client.send(toSend);
+		}
+
 		return false;
 	}
 
