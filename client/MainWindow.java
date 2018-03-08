@@ -14,7 +14,7 @@ public class MainWindow extends JFrame {
 
 	public MainWindow() {
 		super();
-		
+
 		this.setTitle("Chat");
 		this.setSize(500, 800);
 		this.setLocationRelativeTo(null);
@@ -50,6 +50,12 @@ public class MainWindow extends JFrame {
 			return "Internet connection error!";
 		}
 		return "OK";
+	}
+
+	public boolean sendMessage(String message) {
+		if(this.client != null)
+			return this.client.send(ClientMessage.SEND_MESSAGE, message);
+		return false;
 	}
 
 }

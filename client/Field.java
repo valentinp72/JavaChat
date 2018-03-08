@@ -19,6 +19,11 @@ public class Field extends JPanel {
 		this.add(field);
 	}
 
+	public Field(String name, String value) {
+		this(name);
+		this.field.setText(value);
+	}
+
 	public void setPreferredSize(int x, int y) {
 		this.field.setPreferredSize(new Dimension(x, y));
 	}

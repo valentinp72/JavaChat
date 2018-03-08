@@ -23,9 +23,9 @@ public class ConfigurationPanel extends JPanel {
 		
 		this.setLayout(new GridLayout(2, 2));
 
-		this.username = new Field("Nom");
-		this.ip       = new Field("IP");
-		this.port     = new Field("Port");
+		this.username = new Field("Nom",  "Votre nom");
+		this.ip       = new Field("IP",   "127.0.0.1");
+		this.port     = new Field("Port", "5890");
 		this.btnLogin = new Button("Connexion");
 
 		this.btnLogin.addActionListener(new ActionListener() {
