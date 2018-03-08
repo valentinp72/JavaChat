@@ -8,6 +8,8 @@ import chat.messages.ClientMessageMessage;
 import chat.messages.ServerMessage;
 import chat.messages.ServerMessageUsers;
 
+import chat.messages.DataMessage;
+
 import java.io.*;
 import java.net.*;
 
@@ -46,6 +48,11 @@ public class ClientThread implements Runnable {
 
 			while(true) {
 				ClientMessage message = this.read();
+				if(message instanceof ClientMessageMessage) {
+					ClientMessageMessage msg = (ClientMessageMessage) message;
+					this.server.addMessage(new DataMessage(username, msg.getMessage()));
+					this.server.sendMessagesList();
+				}
 				System.out.println(message.toString());
 			}
 		}

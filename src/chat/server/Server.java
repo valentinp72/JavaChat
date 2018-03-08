@@ -16,14 +16,16 @@ public class Server {
 	private int port;
 	private String host;
 
+	private List<DataMessage> messages;
 	private List<ClientThread> clients;
 	private ServerSocket server;
 
 	public Server() {
 		try {
-			this.host    = "127.0.0.1";
-			this.port    = 5890;
-			this.clients = new ArrayList<ClientThread>();
+			this.host     = "127.0.0.1";
+			this.port     = 5890;
+			this.clients  = new ArrayList<ClientThread>();
+			this.messages = new ArrayList<DataMessage>();
 
 			System.out.print("Démarrage du serveur " + this.host + ":" + this.port + "...");
 			this.server = new ServerSocket(port, 100, InetAddress.getByName(host));
@@ -58,6 +60,14 @@ public class Server {
 	public void sendUserList() {
 		List<String> users = this.getUsers();
 		this.sendServerMsgToClients(new ServerMessageUsers(users));
+	}
+
+	public void addMessage(DataMessage message) {
+		this.messages.add(message);
+	}
+
+	public void sendMessagesList() {
+		this.sendServerMsgToClients(new ServerMessageMessages(this.messages));
 	}
 
 	public void sendServerMsgToClients(ServerMessage msg) {

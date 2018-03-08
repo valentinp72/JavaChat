@@ -4,13 +4,13 @@ import java.util.List;
 
 public class ServerMessageMessages extends ServerMessage {
 
-	private List<String> messages;
+	private List<DataMessage> messages;
 
-	public ServerMessageMessages(List<String> messages) {
+	public ServerMessageMessages(List<DataMessage> messages) {
 		this.messages = messages;
 	}
 
-	public List<String> getMessages() {
+	public List<DataMessage> getMessages() {
 		return this.messages;
 	}
 
