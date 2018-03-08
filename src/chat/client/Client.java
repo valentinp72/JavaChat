@@ -4,6 +4,8 @@ import chat.messages.ClientMessage;
 import chat.messages.ClientMessageLogin;
 import chat.messages.ClientMessageLogout;
 
+import chat.messages.ServerMessage;
+
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.net.InetAddress;
@@ -22,6 +24,7 @@ public class Client {
 	private Socket socket;
 	private ObjectOutputStream writer;
 	private ObjectInputStream  reader;
+	private ServerThread thread;
 
 	public Client(String serverIP, int serverPort, String clientName)
 		throws UnknownHostException, IOException {
@@ -29,6 +32,7 @@ public class Client {
 			this.serverPort = serverPort;
 			this.clientName = clientName;
 			this.socket     = connect();
+			this.thread     = new ServerThread(this.socket, this);
 	}
 
 	private Socket connect() throws IOException {
@@ -72,6 +76,15 @@ public class Client {
 		}
 		catch(IOException e) {
 			return false;
+		}
+	}
+
+	public ServerMessage read() throws IOException {
+		try {
+			return (ServerMessage) reader.readObject();
+		}
+		catch(ClassNotFoundException e) {
+			return null;
 		}
 	}
 

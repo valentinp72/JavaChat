@@ -1,5 +1,7 @@
 package chat.server;
 
+import chat.messages.*;
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -41,6 +43,27 @@ public class Server {
 
 	public void removeClient(ClientThread client) {
 		clients.remove(client);
+	}
+
+	public List<String> getUsers() {
+		List<String> users = new ArrayList<String>();
+		for(ClientThread client : clients) {
+			if(client.getUsername() != null) {
+				users.add(client.getUsername());
+			}
+		}
+		return users;
+	}
+
+	public void sendUserList() {
+		List<String> users = this.getUsers();
+		this.sendServerMsgToClients(new ServerMessageUsers(users));
+	}
+
+	public void sendServerMsgToClients(ServerMessage msg) {
+		for(ClientThread client : clients) {
+			client.send(msg);
+		}
 	}
 
 	public void run() {
