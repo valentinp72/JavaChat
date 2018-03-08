@@ -67,7 +67,8 @@ public class Server {
 	}
 
 	public void sendMessagesList() {
-		this.sendServerMsgToClients(new ServerMessageMessages(this.messages));
+		ServerMessageMessages msgs = new ServerMessageMessages(this.messages);
+		this.sendServerMsgToClients(msgs);
 	}
 
 	public void sendServerMsgToClients(ServerMessage msg) {

@@ -1,10 +1,7 @@
 package chat.client;
 
-import chat.messages.ClientMessage;
-import chat.messages.ClientMessageLogin;
-import chat.messages.ClientMessageLogout;
 
-import chat.messages.ServerMessage;
+import chat.messages.*;
 
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -71,6 +68,7 @@ public class Client {
 
 	public boolean send(ClientMessage message) {
 		try {
+			writer.reset();
 			writer.writeObject(message);
 			return true;
 		}

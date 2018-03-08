@@ -1,12 +1,7 @@
 package chat.client;
 
-import chat.messages.ClientMessage;
-import chat.messages.ClientMessageLogin;
-import chat.messages.ClientMessageLogout;
-import chat.messages.ClientMessageMessage;
+import chat.messages.*;
 
-import chat.messages.ServerMessage;
-import chat.messages.ServerMessageUsers;
 
 import java.io.*;
 import java.net.*;
@@ -31,6 +26,10 @@ public class ServerThread implements Runnable {
 			try {
 				ServerMessage message = client.read();
 				System.out.println(message.toString());
+				if(message instanceof ServerMessageMessages) {
+					ServerMessageMessages msg = (ServerMessageMessages) message;
+					//System.out.println(msg.getMessages());
+				}
 			}
 			catch(IOException e) {
 				e.printStackTrace();

@@ -1,14 +1,6 @@
 package chat.server;
 
-import chat.messages.ClientMessage;
-import chat.messages.ClientMessageLogin;
-import chat.messages.ClientMessageLogout;
-import chat.messages.ClientMessageMessage;
-
-import chat.messages.ServerMessage;
-import chat.messages.ServerMessageUsers;
-
-import chat.messages.DataMessage;
+import chat.messages.*;
 
 import java.io.*;
 import java.net.*;
@@ -63,6 +55,7 @@ public class ClientThread implements Runnable {
 
 	public void send(ServerMessage msg) {
 		try {
+			output.reset();
 			output.writeObject(msg);
 		}
 		catch(IOException e) {
