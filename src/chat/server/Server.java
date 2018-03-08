@@ -1,3 +1,5 @@
+package chat.server;
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -20,12 +22,12 @@ public class Server {
 			this.host    = "127.0.0.1";
 			this.port    = 5890;
 			this.clients = new ArrayList<ClientThread>();
-			
+
 			System.out.print("Démarrage du serveur " + this.host + ":" + this.port + "...");
 			this.server = new ServerSocket(port, 100, InetAddress.getByName(host));
 			System.out.println("fait!");
 
-		} 
+		}
 		catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -51,11 +53,6 @@ public class Server {
 				e.printStackTrace();
 			}
 		}
-	}
-
-	public static void main(String[] args) {
-		Server s = new Server();
-		s.run();
 	}
 
 }

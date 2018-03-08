@@ -1,3 +1,9 @@
+package chat.client.ui;
+
+import chat.client.Client;
+import chat.ClientMessage;
+
+
 import javax.swing.JFrame;
 import java.awt.BorderLayout;
 

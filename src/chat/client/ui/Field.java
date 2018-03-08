@@ -1,3 +1,5 @@
+package chat.client.ui;
+
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
@@ -11,7 +13,7 @@ public class Field extends JPanel {
 	private JTextField field;
 
 	public Field(String name) {
-		this.label = new JLabel(name);	
+		this.label = new JLabel(name);
 		this.field = new JTextField("");
 		this.field.setPreferredSize(new Dimension(200, 30));
 

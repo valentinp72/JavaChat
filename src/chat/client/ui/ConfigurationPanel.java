@@ -1,10 +1,12 @@
+package chat.client.ui;
+
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import java.awt.GridLayout; 
+import java.awt.GridLayout;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -20,7 +22,7 @@ public class ConfigurationPanel extends JPanel {
 
 	public ConfigurationPanel(MainWindow window) {
 		this.window = window;
-		
+
 		this.setLayout(new GridLayout(2, 2));
 
 		this.username = new Field("Nom",  "Votre nom");
@@ -32,7 +34,7 @@ public class ConfigurationPanel extends JPanel {
 			public void actionPerformed(ActionEvent event) {
 				int portValue    = 0;
 				String ipValue   = ip.getText();
-				String usernameV = username.getText(); 
+				String usernameV = username.getText();
 
 				try {
 					portValue = port.getInt();
@@ -49,7 +51,7 @@ public class ConfigurationPanel extends JPanel {
 					this.displayInfo("Connected !");
 				}
 			}
-			
+
 			public void displayError(String message) {
 				display(message, JOptionPane.ERROR_MESSAGE);
 			}

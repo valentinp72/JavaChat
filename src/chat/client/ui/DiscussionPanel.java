@@ -1,3 +1,5 @@
+package chat.client.ui;
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -30,7 +32,7 @@ public class DiscussionPanel extends JPanel {
 		this.message = new JTextArea("Message");
 		this.message.setRows(4);
 		this.message.setColumns(80);
-	
+
 		this.messages     = new ArrayList<String>();
 		this.conversation = new JList<String>();
 
@@ -43,21 +45,21 @@ public class DiscussionPanel extends JPanel {
 				}
 				else {
 					JOptionPane.showMessageDialog(
-						new JFrame(), 
-						"Erreur lors de l'envoi du message...", 
-						"Dialog", 
+						new JFrame(),
+						"Erreur lors de l'envoi du message...",
+						"Dialog",
 						JOptionPane.ERROR_MESSAGE
 					);
 				}
 				addMessage(message.getText());
-			}	
+			}
 		});
 
 		this.add(conversation);
 		this.add(message);
 		this.add(btnSend);
 	}
-	
+
 	public void addMessage(String message) {
 		this.messages.add(message);
 		this.conversation.setListData(messages.toArray(new String[messages.size()]));

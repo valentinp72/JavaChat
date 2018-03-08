@@ -1,3 +1,7 @@
+package chat.client;
+
+import chat.ClientMessage;
+
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.net.InetAddress;
@@ -18,7 +22,7 @@ public class Client {
 	private BufferedWriter writer;
 	private BufferedInputStream reader;
 
-	public Client(String serverIP, int serverPort, String clientName) 
+	public Client(String serverIP, int serverPort, String clientName)
 		throws UnknownHostException, IOException {
 			this.serverIP   = InetAddress.getByName(serverIP);
 			this.serverPort = serverPort;
@@ -29,9 +33,9 @@ public class Client {
 	private Socket connect() throws IOException {
 		// Use system proxies
 		System.setProperty("java.net.useSystemProxies", "true");
-		
+
 		Socket sock = new Socket(serverIP, serverPort);
-	
+
 		if(sock == null) {
 			throw new IOException();
 		}
