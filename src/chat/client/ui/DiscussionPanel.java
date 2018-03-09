@@ -11,10 +11,13 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
+import javax.swing.JScrollBar;
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
 
-
+import java.awt.Adjustable;
+import java.awt.event.AdjustmentEvent;
+import java.awt.event.AdjustmentListener;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -27,6 +30,7 @@ public class DiscussionPanel extends JPanel {
 	private JTextArea  message;
 
 	private JTable conversation;
+	private JScrollPane scrollPane;
 	private MessagesTableModel tableModel;
 
 	private MainWindow window;
@@ -36,19 +40,36 @@ public class DiscussionPanel extends JPanel {
 		this.layout = new GridLayout(3, 1);
 		this.setLayout(this.layout);
 
+		this.createMessageArea();
+		this.createTableArea();
+		this.createSendArea();
+
+		this.add(scrollPane);
+		this.add(message);
+		this.add(btnSend);
+	}
+
+	private void createMessageArea() {
 		this.message = new JTextArea("Message");
 		this.message.setRows(4);
 		this.message.setColumns(80);
 		this.message.setBorder(BorderFactory.createTitledBorder("Message"));
 		this.message.setLineWrap(true);
+	}
 
+	private void createTableArea() {
 		this.tableModel   = new MessagesTableModel();
 		this.conversation = new JTable(this.tableModel);
-		this.conversation.getColumnModel().getColumn(0).setWidth(50);
-		this.conversation.getColumnModel().getColumn(1).setWidth(500);
-		this.conversation.getColumnModel().getColumn(2).setWidth(50);
+		this.conversation.getColumn("Pseudo").setMaxWidth(100);
+		this.conversation.getColumn("Message").setWidth(300);
+		this.conversation.getColumn("Heure").setMaxWidth(50);
+		this.conversation.getColumn("Message").setCellRenderer(new WrapTableCellRenderer());
+		this.scrollPane = new JScrollPane(conversation);
+	}
 
+	private void createSendArea() {
 		this.btnSend = new Button("Envoyer");
+
 		this.btnSend.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				boolean sent = window.sendMessage(message.getText());
@@ -65,31 +86,31 @@ public class DiscussionPanel extends JPanel {
 				}
 			}
 		});
-
-		this.add(new JScrollPane(conversation));
-		this.add(message);
-		this.add(btnSend);
 	}
 
-	public void showLastMessage() {
-	//	int lastIndex = conversation.getModel().getSize() - 1;
-	//	if (lastIndex >= 0) {
-   	//		conversation.ensureIndexIsVisible(lastIndex);
-	//	}
+	private void showLastMessage() {
+		// https://stackoverflow.com/a/31317110/7625364
+		JScrollBar verticalBar = scrollPane.getVerticalScrollBar();
+	    AdjustmentListener downScroller = new AdjustmentListener() {
+	        @Override
+	        public void adjustmentValueChanged(AdjustmentEvent e) {
+	            Adjustable adjustable = e.getAdjustable();
+	            adjustable.setValue(adjustable.getMaximum());
+	            verticalBar.removeAdjustmentListener(this);
+	        }
+	    };
+	    verticalBar.addAdjustmentListener(downScroller);
+		verticalBar.setValue(verticalBar.getMaximum() );
 	}
 
 	public void addMessage(DataMessage message) {
-		//this.messages.add(message);
-		//this.conversation.setListData(messages.toArray(new DataMessage[messages.size()]));
-		//this.showLastMessage();
 		this.tableModel.addMessage(message);
+		this.showLastMessage();
 	}
 
 	public void setMessages(List<DataMessage> messages) {
-	//	this.messages = messages;
-	//	this.conversation.setListData(messages.toArray(new DataMessage[messages.size()]));
-	//	this.showLastMessage();
 		this.tableModel.setMessages(messages);
+		this.showLastMessage();
 	}
 
 }
