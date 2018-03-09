@@ -14,13 +14,16 @@ import javax.swing.JList;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+import chat.messages.DataMessage;
+
 public class DiscussionPanel extends JPanel {
 
 	private GridLayout layout;
 	private Button     btnSend;
 	private JTextArea  message;
-	private JList<String> conversation;
-	private List<String>  messages;
+
+	private JList<DataMessage> conversation;
+	private List<DataMessage>  messages;
 
 	private MainWindow window;
 
@@ -33,8 +36,8 @@ public class DiscussionPanel extends JPanel {
 		this.message.setRows(4);
 		this.message.setColumns(80);
 
-		this.messages     = new ArrayList<String>();
-		this.conversation = new JList<String>();
+		this.messages     = new ArrayList<DataMessage>();
+		this.conversation = new JList<DataMessage>();
 
 		this.btnSend = new Button("Envoyer");
 		this.btnSend.addActionListener(new ActionListener() {
@@ -51,7 +54,6 @@ public class DiscussionPanel extends JPanel {
 						JOptionPane.ERROR_MESSAGE
 					);
 				}
-				addMessage(message.getText());
 			}
 		});
 
@@ -60,9 +62,14 @@ public class DiscussionPanel extends JPanel {
 		this.add(btnSend);
 	}
 
-	public void addMessage(String message) {
+	public void addMessage(DataMessage message) {
 		this.messages.add(message);
-		this.conversation.setListData(messages.toArray(new String[messages.size()]));
+		this.conversation.setListData(messages.toArray(new DataMessage[messages.size()]));
+	}
+
+	public void setMessages(List<DataMessage> messages) {
+		this.messages = messages;
+		this.conversation.setListData(messages.toArray(new DataMessage[messages.size()]));
 	}
 
 }

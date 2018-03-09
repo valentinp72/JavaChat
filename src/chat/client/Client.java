@@ -13,7 +13,6 @@ import java.io.IOException;
 
 public class Client {
 
-
 	private InetAddress serverIP;
 	private String      clientName;
 	private int         serverPort;
@@ -22,6 +21,8 @@ public class Client {
 	private ObjectOutputStream writer;
 	private ObjectInputStream  reader;
 	private ServerThread thread;
+
+	private ActionsMessages actionsMessages;
 
 	public Client(String serverIP, int serverPort, String clientName)
 		throws UnknownHostException, IOException {
@@ -84,6 +85,14 @@ public class Client {
 		catch(ClassNotFoundException e) {
 			return null;
 		}
+	}
+
+	public void setActionMessages(ActionsMessages action) {
+		this.actionsMessages = action;
+	}
+
+	public ActionsMessages getActionsMessages() {
+		return this.actionsMessages;
 	}
 
 }

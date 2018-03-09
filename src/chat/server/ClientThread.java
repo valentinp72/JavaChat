@@ -37,6 +37,7 @@ public class ClientThread implements Runnable {
 			ClientMessageLogin loginMsg = (ClientMessageLogin) this.read();
 			this.username = loginMsg.getUsername();
 			this.server.sendUserList();
+			this.server.sendMessagesList();
 
 			while(true) {
 				ClientMessage message = this.read();

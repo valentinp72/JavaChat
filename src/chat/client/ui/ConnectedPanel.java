@@ -1,5 +1,7 @@
 package chat.client.ui;
 
+import java.util.List;
+
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -23,8 +25,12 @@ public class ConnectedPanel extends JPanel {
 
 	}
 
-	public void setContent(String[] content) {
+	public void setUsers(String[] content) {
 		this.list.setListData(content);
+	}
+
+	public void setUsers(List<String> content) {
+		this.setUsers(content.toArray(new String[0]));
 	}
 
 }
