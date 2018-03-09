@@ -5,24 +5,21 @@ import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.BorderFactory;
+import javax.swing.border.Border;
 
 import java.awt.BorderLayout;
 
 public class ConnectedPanel extends JPanel {
 
-	private BorderLayout layout;
-	private JLabel label;
 	private JList<String> list;
 
 	public ConnectedPanel(MainWindow window) {
-		this.label = new JLabel("Connectés");
-		this.list  = new JList<String>();
+		this.list = new JList<String>();
 
-		this.layout = new BorderLayout(10, 10);
-		this.setLayout(layout);
-		this.add(this.label, BorderLayout.NORTH);
-		this.add(this.list,  BorderLayout.CENTER);
+		this.list.setBorder(BorderFactory.createTitledBorder("Connectés"));
 
+		this.add(this.list);
 	}
 
 	public void setUsers(String[] content) {

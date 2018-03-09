@@ -21,8 +21,9 @@ public class ServerThread implements Runnable {
 
 	public void run() {
 		System.out.println("Connecté!");
-		while(true) {
-			try {
+		try {
+			while(true) {
+
 				ServerMessage message = client.read();
 
 				System.out.println(message.toString());
@@ -39,9 +40,9 @@ public class ServerThread implements Runnable {
 					client.getActionsMessages().setUsers(msg.getUsers());
 				}
 			}
-			catch(IOException e) {
-				e.printStackTrace();
-			}
+		}
+		catch(IOException e) {
+			e.printStackTrace();
 		}
 	}
 

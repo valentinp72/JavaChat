@@ -9,7 +9,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JList;
+import javax.swing.JTable;
+import javax.swing.JScrollPane;
+import javax.swing.BorderFactory;
+import javax.swing.border.Border;
+
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -22,8 +26,8 @@ public class DiscussionPanel extends JPanel {
 	private Button     btnSend;
 	private JTextArea  message;
 
-	private JList<DataMessage> conversation;
-	private List<DataMessage>  messages;
+	private JTable conversation;
+	private MessagesTableModel tableModel;
 
 	private MainWindow window;
 
@@ -35,9 +39,14 @@ public class DiscussionPanel extends JPanel {
 		this.message = new JTextArea("Message");
 		this.message.setRows(4);
 		this.message.setColumns(80);
+		this.message.setBorder(BorderFactory.createTitledBorder("Message"));
+		this.message.setLineWrap(true);
 
-		this.messages     = new ArrayList<DataMessage>();
-		this.conversation = new JList<DataMessage>();
+		this.tableModel   = new MessagesTableModel();
+		this.conversation = new JTable(this.tableModel);
+		this.conversation.getColumnModel().getColumn(0).setWidth(50);
+		this.conversation.getColumnModel().getColumn(1).setWidth(500);
+		this.conversation.getColumnModel().getColumn(2).setWidth(50);
 
 		this.btnSend = new Button("Envoyer");
 		this.btnSend.addActionListener(new ActionListener() {
@@ -57,19 +66,30 @@ public class DiscussionPanel extends JPanel {
 			}
 		});
 
-		this.add(conversation);
+		this.add(new JScrollPane(conversation));
 		this.add(message);
 		this.add(btnSend);
 	}
 
+	public void showLastMessage() {
+	//	int lastIndex = conversation.getModel().getSize() - 1;
+	//	if (lastIndex >= 0) {
+   	//		conversation.ensureIndexIsVisible(lastIndex);
+	//	}
+	}
+
 	public void addMessage(DataMessage message) {
-		this.messages.add(message);
-		this.conversation.setListData(messages.toArray(new DataMessage[messages.size()]));
+		//this.messages.add(message);
+		//this.conversation.setListData(messages.toArray(new DataMessage[messages.size()]));
+		//this.showLastMessage();
+		this.tableModel.addMessage(message);
 	}
 
 	public void setMessages(List<DataMessage> messages) {
-		this.messages = messages;
-		this.conversation.setListData(messages.toArray(new DataMessage[messages.size()]));
+	//	this.messages = messages;
+	//	this.conversation.setListData(messages.toArray(new DataMessage[messages.size()]));
+	//	this.showLastMessage();
+		this.tableModel.setMessages(messages);
 	}
 
 }
