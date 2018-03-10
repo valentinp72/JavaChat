@@ -100,7 +100,6 @@ public class DiscussionPanel extends JPanel {
 	        }
 	    };
 	    verticalBar.addAdjustmentListener(downScroller);
-		verticalBar.setValue(verticalBar.getMaximum() );
 	}
 
 	public void addMessage(DataMessage message) {

@@ -48,7 +48,7 @@ public class ConfigurationPanel extends JPanel {
 					this.displayError(res);
 				}
 				else {
-					this.displayInfo("Connected !");
+					// en fait, c'est relou this.displayInfo("Connected !");
 				}
 			}
 

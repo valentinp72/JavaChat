@@ -11,7 +11,9 @@ import chat.messages.ClientMessageMessage;
 import chat.messages.DataMessage;
 
 import javax.swing.JFrame;
+
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 
 import java.io.IOException;
 import java.net.UnknownHostException;
@@ -23,34 +25,37 @@ public class MainWindow extends JFrame {
 	private ConfigurationPanel panelConfig;
 	private ConnectedPanel     panelConnected;
 	private DiscussionPanel    panelDiscussion;
+	private LogoutPanel        panelLogout;
 
 	public MainWindow() {
 		super();
 
 		this.setTitle("Chat");
-		this.setSize(500, 800);
+		this.setSize(800, 500);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		// create the panels
 		this.panelConfig     = new ConfigurationPanel(this);
+		this.panelLogout     = new LogoutPanel(this);
 		this.panelConnected  = new ConnectedPanel(this);
 		this.panelDiscussion = new DiscussionPanel(this);
 
 		// add everything on the window
 		this.setLayout(new BorderLayout());
-		this.getContentPane().add(panelConfig,     BorderLayout.NORTH);
-		this.getContentPane().add(panelConnected,  BorderLayout.WEST);
-		this.getContentPane().add(panelDiscussion, BorderLayout.CENTER);
+		this.getContentPane().add(panelConfig, BorderLayout.CENTER);
 
 		this.setVisible(true);
-
-		//System.out.println(this.setClient());
 	}
 
 	public String setClient(String ip, int port, String username) {
 		try {
 			this.client = new Client(ip, port, username);
+			this.getContentPane().remove(this.panelConfig);
+			this.getContentPane().add(panelLogout,     BorderLayout.NORTH);
+			this.getContentPane().add(panelConnected,  BorderLayout.WEST);
+			this.getContentPane().add(panelDiscussion, BorderLayout.CENTER);
+			this.repaint();
 
 			this.client.setActionMessages(new ActionsMessages() {
 				@Override
@@ -76,6 +81,18 @@ public class MainWindow extends JFrame {
 			return "Internet connection error!";
 		}
 		return "OK";
+	}
+
+	public void resetClient() {
+		if(this.client != null) {
+			this.client.disconnect();
+			this.client = null;
+		}
+		this.getContentPane().remove(this.panelLogout);
+		this.getContentPane().remove(this.panelConnected);
+		this.getContentPane().remove(this.panelDiscussion);
+		this.getContentPane().add(panelConfig, BorderLayout.CENTER);
+		this.repaint();
 	}
 
 	public boolean sendMessage(String message) {

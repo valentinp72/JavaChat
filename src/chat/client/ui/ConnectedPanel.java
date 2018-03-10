@@ -15,10 +15,10 @@ public class ConnectedPanel extends JPanel {
 	private JList<String> list;
 
 	public ConnectedPanel(MainWindow window) {
+		super();
 		this.list = new JList<String>();
 
 		this.list.setBorder(BorderFactory.createTitledBorder("Connectés"));
-
 		this.add(this.list);
 	}
 

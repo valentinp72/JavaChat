@@ -58,7 +58,10 @@ public class Client {
 		if(this.socket != null) {
 			try {
 				this.send(new ClientMessageLogout());
-				socket.close();
+				this.reader.close();
+				this.writer.close();
+				this.thread.stop();
+				this.socket.close();
 				socket = null;
 			}
 			catch(IOException e) {

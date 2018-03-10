@@ -23,6 +23,7 @@ public class WrapTableCellRenderer extends JTextArea implements TableCellRendere
 		int column
 	) {
 		int width  = table.getColumnModel().getColumn(column).getWidth();
+		int height = getPreferredSize().height;
 
 		this.setText(value.toString());
 		this.setSize(width, getPreferredSize().height);
@@ -31,5 +32,4 @@ public class WrapTableCellRenderer extends JTextArea implements TableCellRendere
 			table.setRowHeight(row, getPreferredSize().height);
 		return this;
 	}
-
 }
