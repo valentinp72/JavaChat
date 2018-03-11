@@ -100,19 +100,25 @@ public class ClientThread implements Runnable {
 
 			this.user = new DataUser(loginMsg.getUsername()); // we create the real user
 			this.server.sendUserList();     // we send the updated user list to the clients
-			//this.server.sendMessagesList(); // we send the messages to the client
-			//this.send(new ServerMessageMessages(server.getMessages())); // we send the messages to the client
-			this.server.sendMessagesList();
+			this.send(new ServerMessageMessages(server.getMessages())); // we send the messages to the client
 			this.sendWelcomeMessage();      // we send the welcome message
 
 			while(true) {
+
+				// we wait until we receive a message from the client
 				ClientMessage message = this.read();
+
 				if(message instanceof ClientMessageMessage) {
 					ClientMessageMessage msg = (ClientMessageMessage) message;
+
+					// the client sent a new message
 					this.server.addMessage(new DataMessage(user, msg.getMessage()));
 				}
+
 				if(message instanceof ClientMessageLogout) {
 					ClientMessageLogout msg = (ClientMessageLogout) message;
+
+					// the client wants to log out
 					this.server.removeClient(this);
 					this.server.sendUserList();
 					this.sendGoodbyeMessage();
@@ -122,6 +128,7 @@ public class ClientThread implements Runnable {
 			}
 		}
 		catch(IOException e) {
+			// we remove the client
 			this.server.removeClient(this);
 			this.server.sendUserList();
 			this.sendGoodbyeMessage();
@@ -129,9 +136,9 @@ public class ClientThread implements Runnable {
 	}
 
 	/**
-	 * Send.
+	 * Send a message to the client
 	 *
-	 * @param msg the msg
+	 * @param msg the message to send
 	 */
 	public void send(ServerMessage msg) {
 		try {
@@ -144,7 +151,7 @@ public class ClientThread implements Runnable {
 	}
 
 	/**
-	 * Read.
+	 * Read a message from the client. This is blocking.
 	 *
 	 * @return the client message
 	 * @throws IOException Signals that an I/O exception has occurred.
@@ -168,7 +175,7 @@ public class ClientThread implements Runnable {
 	}
 
 	/**
-	 * Send welcome message.
+	 * Send welcome message to all.
 	 */
 	public void sendWelcomeMessage() {
 		DataMessage msg = new DataMessage(ADMIN_USER, user.toString() + " vient de rejoindre.");
@@ -176,7 +183,7 @@ public class ClientThread implements Runnable {
 	}
 
 	/**
-	 * Send goodbye message.
+	 * Send goodbye message to all.
 	 */
 	public void sendGoodbyeMessage() {
 		DataMessage msg = new DataMessage(ADMIN_USER, user.toString() + " vient de quitter.");

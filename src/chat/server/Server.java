@@ -13,25 +13,25 @@ import chat.messages.ServerMessageMessages;
 import chat.messages.ServerMessageNewMessage;
 import chat.messages.ServerMessageUsers;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class Server.
+ * This class represents the core server.
  */
+
 public class Server {
 
-	/** The port. */
+	/** The port of the server */
 	private int port;
 
-	/** The host. */
+	/** The host */
 	private String host;
 
-	/** The messages. */
+	/** The messages */
 	private List<DataMessage> messages;
 
-	/** The clients. */
+	/** The clients */
 	private List<ClientThread> clients;
 
-	/** The server. */
+	/** The server socket */
 	private ServerSocket server;
 
 	/**
@@ -39,6 +39,7 @@ public class Server {
 	 */
 	public Server() {
 		try {
+			// default configuration
 			this.host     = "127.0.0.1";
 			this.port     = 5890;
 			this.clients  = new ArrayList<ClientThread>();
@@ -56,7 +57,7 @@ public class Server {
 	}
 
 	/**
-	 * Adds the client.
+	 * Adds a client to the server. This starts dedicated thread for it.
 	 *
 	 * @param client the client
 	 */
@@ -66,7 +67,7 @@ public class Server {
 	}
 
 	/**
-	 * Removes the client.
+	 * Removes the client from the server.
 	 *
 	 * @param client the client
 	 */
@@ -75,7 +76,7 @@ public class Server {
 	}
 
 	/**
-	 * Gets the users.
+	 * Gets the connected users.
 	 *
 	 * @return the users
 	 */
@@ -90,7 +91,7 @@ public class Server {
 	}
 
 	/**
-	 * Gets the usernames.
+	 * Gets the usernames of all connected users.
 	 *
 	 * @return the usernames
 	 */
@@ -103,7 +104,7 @@ public class Server {
 	}
 
 	/**
-	 * Send user list.
+	 * Send the user list to all clients.
 	 */
 	public void sendUserList() {
 		List<DataUser> users = this.getUsers();
@@ -111,7 +112,7 @@ public class Server {
 	}
 
 	/**
-	 * Adds the message.
+	 * Adds a message and send it to all.
 	 *
 	 * @param message the message
 	 */
@@ -122,7 +123,7 @@ public class Server {
 	}
 
 	/**
-	 * Send messages list.
+	 * Send the messages list to all clients.
 	 */
 	public void sendMessagesList() {
 		ServerMessageMessages msgs = new ServerMessageMessages(this.messages);
@@ -130,9 +131,9 @@ public class Server {
 	}
 
 	/**
-	 * Send server msg to clients.
+	 * Send a server message to all clients.
 	 *
-	 * @param msg the msg
+	 * @param msg the message
 	 */
 	public void sendServerMsgToClients(ServerMessage msg) {
 		for(ClientThread client : clients) {
@@ -141,20 +142,24 @@ public class Server {
 	}
 
 	/**
-	 * Run.
+	 * Run the server : accept all the clients.
 	 */
 	public void run() {
-		while(true) {
-			try {
+		try {
+			while(true) {
 				Socket clientSc = server.accept();
 				this.addClient(clientSc);
 			}
-			catch(Exception e) {
-				e.printStackTrace();
-			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
 		}
 	}
 
+	/**
+	 * Returns the messages of the server
+	 * @return the messages
+	 */
 	public List<DataMessage> getMessages() {
 		return this.messages;
 	}
