@@ -56,7 +56,6 @@ public class ServerThread implements Runnable {
 	 * and take actions from them.
 	 */
 	public void run() {
-		System.out.println("Connecté!");
 		try {
 			while(running) {
 
@@ -87,6 +86,16 @@ public class ServerThread implements Runnable {
 						}
 
 					}
+
+					// we wait a little bit more
+					try {
+						Thread.sleep(100);
+
+					}
+					catch(InterruptedException e) {
+						// pas grave
+					}
+
 
 				}
 				catch(SocketException e) {

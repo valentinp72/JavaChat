@@ -101,7 +101,8 @@ public class ClientThread implements Runnable {
 			this.user = new DataUser(loginMsg.getUsername()); // we create the real user
 			this.server.sendUserList();     // we send the updated user list to the clients
 			//this.server.sendMessagesList(); // we send the messages to the client
-			this.send(new ServerMessageMessages(server.getMessages())); // we send the messages to the client
+			//this.send(new ServerMessageMessages(server.getMessages())); // we send the messages to the client
+			this.server.sendMessagesList();
 			this.sendWelcomeMessage();      // we send the welcome message
 
 			while(true) {
