@@ -1,24 +1,18 @@
 package chat.client.ui;
 
-import java.util.List;
-
-
-import chat.client.Client;
 import chat.client.ActionsMessages;
+import chat.client.Client;
 import chat.messages.ClientMessage;
 import chat.messages.ClientMessageMessage;
-
 import chat.messages.DataMessage;
 import chat.messages.DataUser;
-
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-
 import java.io.IOException;
 import java.net.UnknownHostException;
+import java.util.List;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 public class MainWindow extends JFrame {
 

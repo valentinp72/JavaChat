@@ -1,14 +1,11 @@
 package chat.client.ui;
 
 import chat.messages.DataUser;
-
-import java.awt.Component;
 import java.awt.Color;
-
+import java.awt.Component;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
-
 
 public class ColorTableCellRenderer extends DefaultTableCellRenderer {
 

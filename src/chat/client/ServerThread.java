@@ -1,6 +1,10 @@
 package chat.client;
 
-import chat.messages.*;
+import chat.messages.ServerMessage;
+import chat.messages.ServerMessageUsers;
+import chat.messages.ServerMessageMessages;
+import chat.messages.ServerMessageConnectionError;
+import chat.messages.ServerMessageNewMessage;
 
 import java.util.List;
 

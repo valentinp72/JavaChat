@@ -1,16 +1,16 @@
 package chat.client;
 
-
-import chat.messages.*;
-
+import chat.messages.ClientMessage;
+import chat.messages.ClientMessageLogin;
+import chat.messages.ClientMessageLogout;
+import chat.messages.ServerMessage;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.InetAddress;
 import java.net.Socket;
 import java.net.SocketException;
 import java.net.UnknownHostException;
-import java.net.InetAddress;
-
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.IOException;
 
 public class Client {
 

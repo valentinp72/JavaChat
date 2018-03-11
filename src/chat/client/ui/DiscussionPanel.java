@@ -1,31 +1,29 @@
 package chat.client.ui;
 
-import java.util.List;
-import java.util.ArrayList;
-
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JTable;
-import javax.swing.JScrollPane;
-import javax.swing.JScrollBar;
-import javax.swing.BorderFactory;
-import javax.swing.border.Border;
-import javax.swing.text.StyledDocument;
-import javax.swing.text.*;
-
-import java.awt.Dimension;
+import chat.messages.DataMessage;
 import java.awt.Adjustable;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
-import chat.messages.DataMessage;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.BorderFactory;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextArea;
+import javax.swing.border.Border;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.PlainDocument;
+import javax.swing.text.StyledDocument;
 
 public class DiscussionPanel extends JPanel {
 

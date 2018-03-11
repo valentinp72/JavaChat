@@ -1,12 +1,10 @@
 package chat.client.ui;
 
-import java.util.List;
-import java.util.ArrayList;
-
-import java.awt.Color;
-import javax.swing.table.AbstractTableModel;
-
 import chat.messages.DataMessage;
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.AbstractTableModel;
 
 public class MessagesTableModel extends AbstractTableModel {
 

@@ -1,11 +1,10 @@
 package chat.client.ui;
 
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.JLabel;
-
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class Field extends JPanel {
 

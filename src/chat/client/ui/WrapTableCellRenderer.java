@@ -1,13 +1,10 @@
 package chat.client.ui;
 
 import chat.messages.DataUser;
-
 import java.awt.Component;
-
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.table.TableCellRenderer;
-
 
 public class WrapTableCellRenderer extends JTextArea implements TableCellRenderer {
 
