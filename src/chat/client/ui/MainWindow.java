@@ -2,12 +2,10 @@ package chat.client.ui;
 
 import chat.client.ActionsMessages;
 import chat.client.Client;
-import chat.messages.ClientMessage;
 import chat.messages.ClientMessageMessage;
 import chat.messages.DataMessage;
 import chat.messages.DataUser;
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.List;
@@ -54,22 +52,18 @@ public class MainWindow extends JFrame {
 			this.setVisible(true);
 
 			this.client.setActionMessages(new ActionsMessages() {
-				@Override
 				public void newMessage(DataMessage message) {
 					panelDiscussion.addMessage(message);
 				}
 
-				@Override
 				public void setMessages(List<DataMessage> messages) {
 					panelDiscussion.setMessages(messages);
 				}
 
-				@Override
 				public void setUsers(List<DataUser> users) {
 					panelConnected.setUsers(users);
 				}
 
-				@Override
 				public void connectionError(String error) {
 					resetClient();
 					JOptionPane.showMessageDialog(

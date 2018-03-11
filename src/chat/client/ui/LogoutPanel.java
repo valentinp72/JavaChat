@@ -3,11 +3,7 @@ package chat.client.ui;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 public class LogoutPanel extends JPanel {
 
@@ -15,7 +11,7 @@ public class LogoutPanel extends JPanel {
 
 	private MainWindow window;
 
-	public LogoutPanel(MainWindow window) {
+	public LogoutPanel(final MainWindow window) {
 		this.window = window;
 
 		this.setLayout(new GridLayout(1, 1));

@@ -1,9 +1,19 @@
 package chat.server;
 
-import chat.messages.*;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
 
-import java.io.*;
-import java.net.*;
+import chat.messages.ClientMessage;
+import chat.messages.ClientMessageLogin;
+import chat.messages.ClientMessageLogout;
+import chat.messages.ClientMessageMessage;
+import chat.messages.DataMessage;
+import chat.messages.DataUser;
+import chat.messages.ServerMessage;
+import chat.messages.ServerMessageConnectionError;
+
 
 public class ClientThread implements Runnable {
 

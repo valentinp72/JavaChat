@@ -1,6 +1,5 @@
 package chat.messages;
 
-
 public class ServerMessageConnectionError extends ServerMessage {
 
 	private String explanation;

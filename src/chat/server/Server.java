@@ -1,13 +1,17 @@
 package chat.server;
 
-import chat.messages.*;
-import java.io.IOException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
+
+import chat.messages.DataMessage;
+import chat.messages.DataUser;
+import chat.messages.ServerMessage;
+import chat.messages.ServerMessageMessages;
+import chat.messages.ServerMessageNewMessage;
+import chat.messages.ServerMessageUsers;
 
 public class Server {
 

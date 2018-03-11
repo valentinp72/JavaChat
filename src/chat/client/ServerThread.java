@@ -1,15 +1,15 @@
 package chat.client;
 
+import java.io.IOException;
+import java.net.Socket;
+import java.net.SocketException;
+
 import chat.messages.ServerMessage;
-import chat.messages.ServerMessageUsers;
-import chat.messages.ServerMessageMessages;
 import chat.messages.ServerMessageConnectionError;
+import chat.messages.ServerMessageMessages;
 import chat.messages.ServerMessageNewMessage;
+import chat.messages.ServerMessageUsers;
 
-import java.util.List;
-
-import java.io.*;
-import java.net.*;
 
 public class ServerThread implements Runnable {
 
