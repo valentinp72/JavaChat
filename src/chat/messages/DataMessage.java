@@ -6,24 +6,25 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 public class DataMessage implements Serializable {
-	private String username;
-	private String message;
-	private Date   time;
+
+	private DataUser   user;
+	private String     message;
+	private Date       time;
 	private DateFormat dformat;
 
-	public DataMessage(String username, String message) {
-		this.username = username;
+	public DataMessage(DataUser user, String message) {
+		this.user     = user;
 		this.message  = message;
 		this.time     = new Date();
 		this.dformat  = new SimpleDateFormat("HH:mm");
 	}
 
 	public String toString() {
-		return "[" + this.username + " | " + this.time + "] - " + this.message;
+		return "[" + this.user + " | " + this.time + "] - " + this.message;
 	}
 
-	public String getUsername() {
-		return this.username;
+	public DataUser getUser() {
+		return this.user;
 	}
 
 	public String getMessage() {

@@ -47,18 +47,26 @@ public class Server {
 		clients.remove(client);
 	}
 
-	public List<String> getUsers() {
-		List<String> users = new ArrayList<String>();
+	public List<DataUser> getUsers() {
+		List<DataUser> users = new ArrayList<DataUser>();
 		for(ClientThread client : clients) {
-			if(client.getUsername() != null) {
-				users.add(client.getUsername());
+			if(client.getUser() != null) {
+				users.add(client.getUser());
 			}
 		}
 		return users;
 	}
 
+	public List<String> getUsernames() {
+		List<String> usernames = new ArrayList<String>();
+		for(DataUser user : this.getUsers()) {
+			usernames.add(user.toString());
+		}
+		return usernames;
+	}
+
 	public void sendUserList() {
-		List<String> users = this.getUsers();
+		List<DataUser> users = this.getUsers();
 		this.sendServerMsgToClients(new ServerMessageUsers(users));
 	}
 

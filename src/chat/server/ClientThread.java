@@ -7,9 +7,9 @@ import java.net.*;
 
 public class ClientThread implements Runnable {
 
-	private static final String ADMIN_NAME = "";
+	private static final DataUser ADMIN_USER = new DataUser("");
 
-	private String username;
+	private DataUser user;
 	private Thread thread;
 	private Socket socket;
 	private Server server;
@@ -38,7 +38,7 @@ public class ClientThread implements Runnable {
 		try {
 			ClientMessageLogin loginMsg = (ClientMessageLogin) this.read();
 
-			if(this.server.getUsers().contains(loginMsg.getUsername()) || loginMsg.getUsername() == ADMIN_NAME) {
+			if(this.server.getUsernames().contains(loginMsg.getUsername()) || loginMsg.getUsername() == ADMIN_USER.getUsername()) {
 				this.send(new ServerMessageConnectionError("Pseudo déjà prit !"));
 				this.server.removeClient(this);
 				return;
@@ -55,7 +55,7 @@ public class ClientThread implements Runnable {
 			}
 
 
-			this.username = loginMsg.getUsername();
+			this.user = new DataUser(loginMsg.getUsername());
 			this.server.sendUserList();
 			this.server.sendMessagesList();
 			this.sendWelcomeMessage();
@@ -64,7 +64,7 @@ public class ClientThread implements Runnable {
 				ClientMessage message = this.read();
 				if(message instanceof ClientMessageMessage) {
 					ClientMessageMessage msg = (ClientMessageMessage) message;
-					this.server.addMessage(new DataMessage(username, msg.getMessage()));
+					this.server.addMessage(new DataMessage(user, msg.getMessage()));
 				}
 				if(message instanceof ClientMessageLogout) {
 					ClientMessageLogout msg = (ClientMessageLogout) message;
@@ -102,17 +102,17 @@ public class ClientThread implements Runnable {
 		}
 	}
 
-	public String getUsername() {
-		return this.username;
+	public DataUser getUser() {
+		return this.user;
 	}
 
 	public void sendWelcomeMessage() {
-		DataMessage msg = new DataMessage(ADMIN_NAME, username + " vient de rejoindre.");
+		DataMessage msg = new DataMessage(ADMIN_USER, user.toString() + " vient de rejoindre.");
 		this.server.addMessage(msg);
 	}
 
 	public void sendGoodbyeMessage() {
-		DataMessage msg = new DataMessage(ADMIN_NAME, username + " vient de quitter.");
+		DataMessage msg = new DataMessage(ADMIN_USER, user.toString() + " vient de quitter.");
 		this.server.addMessage(msg);
 	}
 

@@ -3,6 +3,7 @@ package chat.client.ui;
 import java.util.List;
 import java.util.ArrayList;
 
+import java.awt.Color;
 import javax.swing.table.AbstractTableModel;
 
 import chat.messages.DataMessage;
@@ -37,7 +38,7 @@ public class MessagesTableModel extends AbstractTableModel {
 
 		switch(column) {
 			case 0:
-				return message.getUsername();
+				return message.getUser().toString();
 			case 1:
 				return message.getMessage();
 			case 2:
@@ -45,6 +46,13 @@ public class MessagesTableModel extends AbstractTableModel {
 			default:
 				return "Erreur !";
 		}
+	}
+
+	public Color getColorAt(int row, int column) {
+		if(column == 0) {
+			return this.messages.get(row).getUser().getColor();
+		}
+		return Color.BLACK;
 	}
 
 	public void addMessage(DataMessage message) {

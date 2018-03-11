@@ -9,6 +9,7 @@ import chat.messages.ClientMessage;
 import chat.messages.ClientMessageMessage;
 
 import chat.messages.DataMessage;
+import chat.messages.DataUser;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -70,7 +71,7 @@ public class MainWindow extends JFrame {
 				}
 
 				@Override
-				public void setUsers(List<String> users) {
+				public void setUsers(List<DataUser> users) {
 					panelConnected.setUsers(users);
 				}
 

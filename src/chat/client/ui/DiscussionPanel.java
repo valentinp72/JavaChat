@@ -114,6 +114,7 @@ public class DiscussionPanel extends JPanel {
 		this.conversation.getColumn("Message").setWidth(200);
 		this.conversation.getColumn("Heure").setMaxWidth(50);
 		this.conversation.getColumn("Message").setCellRenderer(new WrapTableCellRenderer());
+		this.conversation.getColumn("Pseudo").setCellRenderer(new ColorTableCellRenderer());
 		this.scrollPane = new JScrollPane(conversation);
 	}
 

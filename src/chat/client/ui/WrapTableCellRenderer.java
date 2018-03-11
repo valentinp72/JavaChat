@@ -1,5 +1,7 @@
 package chat.client.ui;
 
+import chat.messages.DataUser;
+
 import java.awt.Component;
 
 import javax.swing.JTable;
@@ -30,6 +32,7 @@ public class WrapTableCellRenderer extends JTextArea implements TableCellRendere
 
 		if(table.getRowHeight(row) != getPreferredSize().height)
 			table.setRowHeight(row, getPreferredSize().height);
+
 		return this;
 	}
 }
