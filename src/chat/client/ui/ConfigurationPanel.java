@@ -5,6 +5,8 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
+
 
 import java.awt.GridLayout;
 
@@ -70,6 +72,12 @@ public class ConfigurationPanel extends JPanel {
 		this.add(this.btnLogin);
 		this.add(this.ip);
 		this.add(this.port);
+	}
+
+	@Override
+	public void addNotify() {
+		super.addNotify();
+		SwingUtilities.getRootPane(btnLogin).setDefaultButton(btnLogin);
 	}
 
 

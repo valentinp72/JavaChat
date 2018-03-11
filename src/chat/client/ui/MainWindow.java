@@ -54,7 +54,6 @@ public class MainWindow extends JFrame {
 			this.client = new Client(ip, port, username);
 			this.getContentPane().remove(this.panelConfig);
 			this.getContentPane().add(panelLogout,     BorderLayout.NORTH);
-			this.getContentPane().add(panelConnected,  BorderLayout.WEST);
 			this.getContentPane().add(panelDiscussion, BorderLayout.CENTER);
 			this.repaint();
 			this.setVisible(true);
@@ -102,7 +101,6 @@ public class MainWindow extends JFrame {
 			this.client = null;
 		}
 		this.getContentPane().remove(this.panelLogout);
-		this.getContentPane().remove(this.panelConnected);
 		this.getContentPane().remove(this.panelDiscussion);
 		this.getContentPane().add(panelConfig, BorderLayout.CENTER);
 		this.repaint();
@@ -118,5 +116,8 @@ public class MainWindow extends JFrame {
 		return false;
 	}
 
+	public ConnectedPanel getPanelConnected() {
+		return this.panelConnected;
+	}
 
 }

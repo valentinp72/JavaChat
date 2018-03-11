@@ -15,6 +15,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JScrollBar;
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
+import javax.swing.text.StyledDocument;
+import javax.swing.text.*;
 
 import java.awt.Dimension;
 import java.awt.Adjustable;
@@ -35,6 +37,7 @@ public class DiscussionPanel extends JPanel {
 	private JTable conversation;
 	private JScrollPane scrollPane;
 	private MessagesTableModel tableModel;
+	private ConnectedPanel panelConnected;
 
 	private MainWindow window;
 
@@ -48,33 +51,61 @@ public class DiscussionPanel extends JPanel {
 		this.createMessageArea();
 		this.createTableArea();
 		this.createSendArea();
+		this.panelConnected = this.window.getPanelConnected();
 
-		gbc.weightx    = 1.0;
-		gbc.gridx      = 0;
 		gbc.fill       = GridBagConstraints.BOTH;
+		//gbc.anchor     = GridBagConstraints.FIRST_LINE_START;
+
+		gbc.gridx      = 0;
+		gbc.gridy      = 0;
+		//gbc.weighty    = 1.0;
+		gbc.weightx    = 0.4;
+		gbc.gridwidth  = 4;
+		gbc.gridheight = 6;
+		gbc.ipadx      = 70;
+		this.add(panelConnected, gbc);
+
+		gbc.weightx    = 0.6;
+		gbc.gridx      = 4;
 		gbc.gridwidth  = 1;
-		gbc.gridheight = 1;
 
 		gbc.weighty    = 0.8;
 		gbc.gridy      = 0;
+		gbc.ipadx      = 0;
+		gbc.gridheight = 3;
 		this.add(scrollPane, gbc);
 
-		gbc.weighty    = 0.2;
-		gbc.gridy      = 1;
+		gbc.weighty    = 0.0;
+		gbc.gridy      = 3;
+		gbc.gridheight = 2;
 		this.add(message, gbc);
 
 		gbc.weighty    = 0.0;
-		gbc.gridy      = 2;
+		gbc.gridy      = 5;
+		gbc.gridheight = 1;
 		this.add(btnSend, gbc);
-
 	}
 
 	private void createMessageArea() {
 		this.message = new JTextArea("Message");
-		this.message.setRows(4);
-		this.message.setColumns(80);
+		this.message.setRows(1);
 		this.message.setBorder(BorderFactory.createTitledBorder("Message"));
 		this.message.setLineWrap(true);
+		this.message.setWrapStyleWord(true);
+
+		// maximum lenght of the message
+		int MAX_LENGTH = 140;
+		int MAX_NEWLN  = 4;
+		this.message.setDocument(new PlainDocument() {
+			@Override
+			public void insertString(int offs, String str, AttributeSet a) throws BadLocationException {
+				int lines = message.getText().split("\r\n|\r|\n", -1).length;
+				if (str == null || message.getText().length() >= MAX_LENGTH || lines >= MAX_NEWLN) {
+	            	return;
+	        	}
+				super.insertString(offs, str, a);
+	    	}
+		});
 	}
 
 	private void createTableArea() {
@@ -82,7 +113,7 @@ public class DiscussionPanel extends JPanel {
 		this.conversation = new JTable(this.tableModel);
 		this.conversation.setRowSelectionAllowed(false);
 		this.conversation.getColumn("Pseudo").setMaxWidth(100);
-		this.conversation.getColumn("Message").setWidth(300);
+		this.conversation.getColumn("Message").setWidth(200);
 		this.conversation.getColumn("Heure").setMaxWidth(50);
 		this.conversation.getColumn("Message").setCellRenderer(new WrapTableCellRenderer());
 		this.scrollPane = new JScrollPane(conversation);
@@ -90,7 +121,6 @@ public class DiscussionPanel extends JPanel {
 
 	private void createSendArea() {
 		this.btnSend = new Button("Envoyer");
-
 		this.btnSend.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				boolean sent = window.sendMessage(message.getText());

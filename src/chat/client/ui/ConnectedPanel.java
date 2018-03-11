@@ -19,12 +19,9 @@ public class ConnectedPanel extends JPanel {
 
 	public ConnectedPanel(MainWindow window) {
 		super();
+		this.setLayout(new BorderLayout());
 		this.list   = new JList<String>();
 		this.scroll = new JScrollPane(this.list);
-
-		//Dimension d = scroll.getPreferredSize();
-		//d.width = 200;
-		//scroll.setPreferredSize(d);
 
 		this.scroll.setBorder(BorderFactory.createTitledBorder("Connectés"));
 		this.add(scroll);
