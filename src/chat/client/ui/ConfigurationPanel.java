@@ -25,7 +25,7 @@ public class ConfigurationPanel extends JPanel {
 
 		this.setLayout(new GridLayout(2, 2));
 
-		this.username = new Field("Nom",  "Votre nom");
+		this.username = new Field("Nom",  "pseudo");
 		this.ip       = new Field("IP",   "127.0.0.1");
 		this.port     = new Field("Port", "5890");
 		this.btnLogin = new Button("Connexion");
@@ -61,7 +61,7 @@ public class ConfigurationPanel extends JPanel {
 			}
 
 			private void display(String message, int option) {
-				JOptionPane.showMessageDialog(new JFrame(), message, "Dialog", option);
+				JOptionPane.showMessageDialog(new JFrame(), message, "Information", option);
 			}
 
 		});

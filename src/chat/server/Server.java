@@ -64,6 +64,8 @@ public class Server {
 
 	public void addMessage(DataMessage message) {
 		this.messages.add(message);
+		ServerMessageNewMessage msg = new ServerMessageNewMessage(message);
+		this.sendServerMsgToClients(msg);
 	}
 
 	public void sendMessagesList() {

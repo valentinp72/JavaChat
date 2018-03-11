@@ -11,6 +11,7 @@ import chat.messages.ClientMessageMessage;
 import chat.messages.DataMessage;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -56,6 +57,7 @@ public class MainWindow extends JFrame {
 			this.getContentPane().add(panelConnected,  BorderLayout.WEST);
 			this.getContentPane().add(panelDiscussion, BorderLayout.CENTER);
 			this.repaint();
+			this.setVisible(true);
 
 			this.client.setActionMessages(new ActionsMessages() {
 				@Override
@@ -71,6 +73,17 @@ public class MainWindow extends JFrame {
 				@Override
 				public void setUsers(List<String> users) {
 					panelConnected.setUsers(users);
+				}
+
+				@Override
+				public void connectionError(String error) {
+					resetClient();
+					JOptionPane.showMessageDialog(
+						new JFrame(),
+						error,
+						"Dialog",
+						JOptionPane.ERROR_MESSAGE
+					);
 				}
 			});
 		}
@@ -93,6 +106,7 @@ public class MainWindow extends JFrame {
 		this.getContentPane().remove(this.panelDiscussion);
 		this.getContentPane().add(panelConfig, BorderLayout.CENTER);
 		this.repaint();
+		this.setVisible(true);
 	}
 
 	public boolean sendMessage(String message) {

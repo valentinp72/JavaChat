@@ -3,7 +3,8 @@ package chat.client.ui;
 import java.util.List;
 import java.util.ArrayList;
 
-import java.awt.GridLayout;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
 
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -15,6 +16,7 @@ import javax.swing.JScrollBar;
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
 
+import java.awt.Dimension;
 import java.awt.Adjustable;
 import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
@@ -25,7 +27,8 @@ import chat.messages.DataMessage;
 
 public class DiscussionPanel extends JPanel {
 
-	private GridLayout layout;
+	private GridBagLayout layout;
+	private GridBagConstraints gbc;
 	private Button     btnSend;
 	private JTextArea  message;
 
@@ -37,16 +40,33 @@ public class DiscussionPanel extends JPanel {
 
 	public DiscussionPanel(MainWindow window) {
 		this.window = window;
-		this.layout = new GridLayout(3, 1);
+		this.layout = new GridBagLayout();
+		this.gbc    = new GridBagConstraints();
+
 		this.setLayout(this.layout);
 
 		this.createMessageArea();
 		this.createTableArea();
 		this.createSendArea();
 
-		this.add(scrollPane);
-		this.add(message);
-		this.add(btnSend);
+		gbc.weightx    = 1.0;
+		gbc.gridx      = 0;
+		gbc.fill       = GridBagConstraints.BOTH;
+		gbc.gridwidth  = 1;
+		gbc.gridheight = 1;
+
+		gbc.weighty    = 0.8;
+		gbc.gridy      = 0;
+		this.add(scrollPane, gbc);
+
+		gbc.weighty    = 0.2;
+		gbc.gridy      = 1;
+		this.add(message, gbc);
+
+		gbc.weighty    = 0.0;
+		gbc.gridy      = 2;
+		this.add(btnSend, gbc);
+
 	}
 
 	private void createMessageArea() {
@@ -60,6 +80,7 @@ public class DiscussionPanel extends JPanel {
 	private void createTableArea() {
 		this.tableModel   = new MessagesTableModel();
 		this.conversation = new JTable(this.tableModel);
+		this.conversation.setRowSelectionAllowed(false);
 		this.conversation.getColumn("Pseudo").setMaxWidth(100);
 		this.conversation.getColumn("Message").setWidth(300);
 		this.conversation.getColumn("Heure").setMaxWidth(50);

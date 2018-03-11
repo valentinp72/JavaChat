@@ -58,4 +58,6 @@ public class MessagesTableModel extends AbstractTableModel {
 		this.fireTableRowsInserted(0, this.messages.size() - 1);
 	}
 
+
+
 }

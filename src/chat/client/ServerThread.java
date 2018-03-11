@@ -25,7 +25,7 @@ public class ServerThread implements Runnable {
 
 	public void stop() {
 		this.running = false;
-		this.thread.stop();
+		this.thread.interrupt();
 	}
 
 	public void run() {
@@ -53,13 +53,18 @@ public class ServerThread implements Runnable {
 							ServerMessageUsers msg = (ServerMessageUsers) message;
 							actions.setUsers(msg.getUsers());
 						}
+						else if(message instanceof ServerMessageConnectionError) {
+							ServerMessageConnectionError msg = (ServerMessageConnectionError) message;
+							actions.connectionError(msg.getExplanation());
+						}
+
 					}
+					System.out.println("action:" + actions);
+
 
 				}
-				catch (InterruptedIOException ex) {
-					System.out.println("interrupted");
-					thread.currentThread().interrupt(); // Très important de réinterrompre
-					break; // Sortie de la boucle infinie
+				catch(SocketException e) {
+					thread.currentThread().interrupt();
 				}
 			}
 		}

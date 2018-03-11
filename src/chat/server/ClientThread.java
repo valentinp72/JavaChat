@@ -7,6 +7,8 @@ import java.net.*;
 
 public class ClientThread implements Runnable {
 
+	private static final String ADMIN_NAME = "";
+
 	private String username;
 	private Thread thread;
 	private Socket socket;
@@ -35,22 +37,38 @@ public class ClientThread implements Runnable {
 		System.out.println("Nouveau client!");
 		try {
 			ClientMessageLogin loginMsg = (ClientMessageLogin) this.read();
+
+			if(this.server.getUsers().contains(loginMsg.getUsername()) || loginMsg.getUsername() == ADMIN_NAME) {
+				this.send(new ServerMessageConnectionError("Pseudo déjà prit !"));
+				this.server.removeClient(this);
+				return;
+			}
+
 			this.username = loginMsg.getUsername();
 			this.server.sendUserList();
 			this.server.sendMessagesList();
+			this.sendWelcomeMessage();
 
 			while(true) {
 				ClientMessage message = this.read();
 				if(message instanceof ClientMessageMessage) {
 					ClientMessageMessage msg = (ClientMessageMessage) message;
 					this.server.addMessage(new DataMessage(username, msg.getMessage()));
-					this.server.sendMessagesList();
+				}
+				if(message instanceof ClientMessageLogout) {
+					ClientMessageLogout msg = (ClientMessageLogout) message;
+					this.server.removeClient(this);
+					this.server.sendUserList();
+					this.sendGoodbyeMessage();
+					return;
 				}
 				System.out.println(message.toString());
 			}
 		}
 		catch(IOException e) {
 			this.server.removeClient(this);
+			this.server.sendUserList();
+			this.sendGoodbyeMessage();
 		}
 	}
 
@@ -75,6 +93,16 @@ public class ClientThread implements Runnable {
 
 	public String getUsername() {
 		return this.username;
+	}
+
+	public void sendWelcomeMessage() {
+		DataMessage msg = new DataMessage(ADMIN_NAME, username + " vient de rejoindre.");
+		this.server.addMessage(msg);
+	}
+
+	public void sendGoodbyeMessage() {
+		DataMessage msg = new DataMessage(ADMIN_NAME, username + " vient de quitter.");
+		this.server.addMessage(msg);
 	}
 
 }

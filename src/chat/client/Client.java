@@ -4,6 +4,7 @@ package chat.client;
 import chat.messages.*;
 
 import java.net.Socket;
+import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.net.InetAddress;
 
