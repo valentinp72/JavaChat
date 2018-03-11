@@ -13,9 +13,10 @@ public class Field extends JPanel {
 	private JTextField field;
 
 	public Field(String name) {
-		this.label = new JLabel(name);
+		this.label = new JLabel(name + " : ");
 		this.field = new JTextField("");
 		this.field.setPreferredSize(new Dimension(200, 30));
+		this.label.setPreferredSize(new Dimension(50, 30));
 
 		this.add(label);
 		this.add(field);

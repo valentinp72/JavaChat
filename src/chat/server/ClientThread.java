@@ -43,6 +43,17 @@ public class ClientThread implements Runnable {
 				this.server.removeClient(this);
 				return;
 			}
+			if(loginMsg.getUsername().trim().length() == 0) {
+				this.send(new ServerMessageConnectionError("Pseudo invalide !"));
+				this.server.removeClient(this);
+				return;
+			}
+			if(loginMsg.getUsername().length() > 20) {
+				this.send(new ServerMessageConnectionError("Pseudo trop long !"));
+				this.server.removeClient(this);
+				return;
+			}
+
 
 			this.username = loginMsg.getUsername();
 			this.server.sendUserList();

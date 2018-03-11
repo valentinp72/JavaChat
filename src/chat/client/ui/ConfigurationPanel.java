@@ -7,28 +7,35 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
-
-import java.awt.GridLayout;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class ConfigurationPanel extends JPanel {
 
+
 	private Field  username;
 	private Field  ip;
 	private Field  port;
 	private Button btnLogin;
+
+	private GridBagLayout      layout;
+	private GridBagConstraints gbc;
 
 	private MainWindow window;
 
 	public ConfigurationPanel(MainWindow window) {
 		this.window = window;
 
-		this.setLayout(new GridLayout(2, 2));
+		this.layout = new GridBagLayout();
+		this.gbc    = new GridBagConstraints();
 
-		this.username = new Field("Nom",  "pseudo");
-		this.ip       = new Field("IP",   "127.0.0.1");
+		this.setLayout(this.layout);
+
+		this.username = new Field(" Nom",  "pseudo");
+		this.ip       = new Field("  IP",   "127.0.0.1");
 		this.port     = new Field("Port", "5890");
 		this.btnLogin = new Button("Connexion");
 
@@ -68,10 +75,25 @@ public class ConfigurationPanel extends JPanel {
 
 		});
 
-		this.add(this.username);
-		this.add(this.btnLogin);
-		this.add(this.ip);
-		this.add(this.port);
+		gbc.fill       = GridBagConstraints.BOTH;
+		gbc.gridwidth  = 1;
+		gbc.gridheight = 1;
+
+		gbc.gridx      = 0;
+		gbc.gridy      = 0;
+		this.add(this.username, gbc);
+
+		gbc.gridx      = 1;
+		gbc.gridy      = 0;
+		this.add(this.btnLogin, gbc);
+
+		gbc.gridx      = 0;
+		gbc.gridy      = 1;
+		this.add(this.ip,       gbc);
+
+		gbc.gridx      = 1;
+		gbc.gridy      = 1;
+		this.add(this.port,     gbc);
 	}
 
 	@Override

@@ -54,16 +54,15 @@ public class DiscussionPanel extends JPanel {
 		this.panelConnected = this.window.getPanelConnected();
 
 		gbc.fill       = GridBagConstraints.BOTH;
-		//gbc.anchor     = GridBagConstraints.FIRST_LINE_START;
 
+		gbc.weightx    = 0.4;
 		gbc.gridx      = 0;
 		gbc.gridy      = 0;
-		//gbc.weighty    = 1.0;
-		gbc.weightx    = 0.4;
 		gbc.gridwidth  = 4;
 		gbc.gridheight = 6;
 		gbc.ipadx      = 70;
 		this.add(panelConnected, gbc);
+		gbc.ipadx      = 0;
 
 		gbc.weightx    = 0.6;
 		gbc.gridx      = 4;
@@ -71,7 +70,6 @@ public class DiscussionPanel extends JPanel {
 
 		gbc.weighty    = 0.8;
 		gbc.gridy      = 0;
-		gbc.ipadx      = 0;
 		gbc.gridheight = 3;
 		this.add(scrollPane, gbc);
 
@@ -112,7 +110,7 @@ public class DiscussionPanel extends JPanel {
 		this.tableModel   = new MessagesTableModel();
 		this.conversation = new JTable(this.tableModel);
 		this.conversation.setRowSelectionAllowed(false);
-		this.conversation.getColumn("Pseudo").setMaxWidth(100);
+		this.conversation.getColumn("Pseudo").setMaxWidth(150);
 		this.conversation.getColumn("Message").setWidth(200);
 		this.conversation.getColumn("Heure").setMaxWidth(50);
 		this.conversation.getColumn("Message").setCellRenderer(new WrapTableCellRenderer());
