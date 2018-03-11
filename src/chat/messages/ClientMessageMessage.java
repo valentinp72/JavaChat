@@ -1,18 +1,17 @@
 package chat.messages;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class ClientMessageMessage.
+ * This class represents a message the client send to the server to send a new message.
  */
 public class ClientMessageMessage extends ClientMessage {
 
-	/** The message. */
+	/** The message */
 	private String message;
 
 	/**
 	 * Instantiates a new client message message.
 	 *
-	 * @param message the message
+	 * @param message the message to be send
 	 */
 	public ClientMessageMessage(String message) {
 		this.message = message;
@@ -27,8 +26,9 @@ public class ClientMessageMessage extends ClientMessage {
 		return this.message;
 	}
 
-	/* (non-Javadoc)
-	 * @see chat.messages.Message#toString()
+	/**
+	 * Returns the client message
+	 * @return the client message
 	 */
 	public String toString() {
 		return toString(message);

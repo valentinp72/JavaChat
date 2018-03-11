@@ -1,6 +1,3 @@
-/*
- * 
- */
 package chat.client.ui;
 
 import java.awt.Adjustable;
@@ -26,37 +23,37 @@ import javax.swing.text.PlainDocument;
 
 import chat.messages.DataMessage;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class DiscussionPanel.
+ * The main panel, allowing the user to chat.
  */
+
 public class DiscussionPanel extends JPanel {
 
-	/** The layout. */
+	/** The layout */
 	private GridBagLayout layout;
-	
-	/** The gbc. */
-	private GridBagConstraints gbc;
-	
-	/** The btn send. */
-	private Button     btnSend;
-	
-	/** The message. */
-	private JTextArea  message;
 
-	/** The conversation. */
+	/** The constrains */
+	private GridBagConstraints gbc;
+
+	/** The send button */
+	private Button btnSend;
+
+	/** The message */
+	private JTextArea message;
+
+	/** The conversation */
 	private JTable conversation;
-	
-	/** The scroll pane. */
+
+	/** The scroll pane */
 	private JScrollPane scrollPane;
-	
-	/** The table model. */
+
+	/** The table model */
 	private MessagesTableModel tableModel;
-	
-	/** The panel connected. */
+
+	/** The connected panel */
 	private ConnectedPanel panelConnected;
 
-	/** The window. */
+	/** The window */
 	private MainWindow window;
 
 	/**
@@ -77,6 +74,8 @@ public class DiscussionPanel extends JPanel {
 		this.panelConnected = this.window.getPanelConnected();
 
 		gbc.fill       = GridBagConstraints.BOTH;
+
+		// this is where the magic happens
 
 		gbc.weightx    = 0.4;
 		gbc.gridx      = 0;
@@ -108,7 +107,7 @@ public class DiscussionPanel extends JPanel {
 	}
 
 	/**
-	 * Creates the message area.
+	 * Creates the message area, allowing the user to enter text.
 	 */
 	private void createMessageArea() {
 		this.message = new JTextArea("Message");
@@ -133,7 +132,7 @@ public class DiscussionPanel extends JPanel {
 	}
 
 	/**
-	 * Creates the table area.
+	 * Creates the table area, listing all the previous messages (a JTable).
 	 */
 	private void createTableArea() {
 		this.tableModel   = new MessagesTableModel();
@@ -148,7 +147,7 @@ public class DiscussionPanel extends JPanel {
 	}
 
 	/**
-	 * Creates the send area.
+	 * Creates the send area, allowing to send the messages.
 	 */
 	private void createSendArea() {
 		this.btnSend = new Button("Envoyer");
@@ -171,7 +170,9 @@ public class DiscussionPanel extends JPanel {
 	}
 
 	/**
-	 * Show last message.
+	 * Scroll the pane to show the last message.
+	 * TODO: ça déconne encore sur les messages qui sont
+	 * trop longs et qui sont wraps en plusieurs lignes
 	 */
 	private void showLastMessage() {
 		// https://stackoverflow.com/a/31317110/7625364
@@ -187,7 +188,7 @@ public class DiscussionPanel extends JPanel {
 	}
 
 	/**
-	 * Adds the message.
+	 * Adds a message to the conversation
 	 *
 	 * @param message the message
 	 */
@@ -197,7 +198,7 @@ public class DiscussionPanel extends JPanel {
 	}
 
 	/**
-	 * Sets the messages.
+	 * Update all the previous messages to new messages.
 	 *
 	 * @param messages the new messages
 	 */

@@ -2,9 +2,8 @@ package chat.client;
 
 import chat.client.ui.MainWindow;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class Application.
+ * The main program.
  */
 public class Application {
 
@@ -15,9 +14,9 @@ public class Application {
 		MainWindow mWindow = new MainWindow();
 	}
 
-	
+
 	/**
-	 * The main method.
+	 * The main program.
 	 *
 	 * @param args the arguments
 	 */

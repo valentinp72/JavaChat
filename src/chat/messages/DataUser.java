@@ -3,22 +3,23 @@ package chat.messages;
 import java.awt.Color;
 import java.io.Serializable;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class DataUser.
+ * This class represents a user in the chat.
  */
+
 public class DataUser implements Serializable {
 
-	/** The username. */
+	/** The username */
 	private String username;
-	
-	/** The color. */
-	private Color  color;
+
+	/** The unique color of the user */
+	private Color color;
 
 	/**
-	 * Instantiates a new data user.
+	 * Instantiates a new data user. A color is given to the user
+	 * according to it's username.
 	 *
-	 * @param username the username
+	 * @param username the username of the user
 	 */
 	public DataUser(String username) {
 		this.username = username;
@@ -33,14 +34,14 @@ public class DataUser implements Serializable {
 
 		// we make sure the color is dark enough to be printed on white
 		double luminance = 0.2126 * r + 0.7152 * g + 0.0722 * b;
-		System.out.println(luminance);
 		if(luminance > 200) {
 			this.color = color.darker().darker();
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
+	/**
+	 * Returns the username
+	 * @return the username
 	 */
 	public String toString() {
 		return this.getUsername();

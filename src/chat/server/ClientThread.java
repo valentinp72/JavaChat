@@ -12,34 +12,36 @@ import chat.messages.ClientMessageMessage;
 import chat.messages.DataMessage;
 import chat.messages.DataUser;
 import chat.messages.ServerMessage;
+import chat.messages.ServerMessageMessages;
 import chat.messages.ServerMessageConnectionError;
 
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class ClientThread.
+ * This class represents a server thread working with a client, always waiting for messages
+ * from the client.
  */
+
 public class ClientThread implements Runnable {
 
-	/** The Constant ADMIN_USER. */
+	/** The user the welcome and goodbye messages are sent by */
 	private static final DataUser ADMIN_USER = new DataUser("");
 
-	/** The user. */
+	/** The user the thread is communicating with */
 	private DataUser user;
-	
-	/** The thread. */
+
+	/** The thread */
 	private Thread thread;
-	
-	/** The socket. */
+
+	/** The socket */
 	private Socket socket;
-	
-	/** The server. */
+
+	/** The server */
 	private Server server;
 
-	/** The output. */
+	/** The output to the client */
 	private ObjectOutputStream output;
-	
-	/** The input. */
+
+	/** The input from the client */
 	private ObjectInputStream  input;
 
 	/**
@@ -64,35 +66,43 @@ public class ClientThread implements Runnable {
 		this.thread.start();
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Runnable#run()
+	/**
+	 * Runs the thread. This wait for a welcome message, and then wait for messages from the client.
 	 */
 	public void run() {
-		System.out.println("Nouveau client!");
 		try {
+
+			// hello message
 			ClientMessageLogin loginMsg = (ClientMessageLogin) this.read();
 
+			// check the username is not already taken
 			if(this.server.getUsernames().contains(loginMsg.getUsername()) || loginMsg.getUsername() == ADMIN_USER.getUsername()) {
 				this.send(new ServerMessageConnectionError("Pseudo déjà prit !"));
 				this.server.removeClient(this);
 				return;
 			}
+
+			// check the username is not null
 			if(loginMsg.getUsername().trim().length() == 0) {
 				this.send(new ServerMessageConnectionError("Pseudo invalide !"));
 				this.server.removeClient(this);
 				return;
 			}
+
+			// check the username length
 			if(loginMsg.getUsername().length() > 20) {
 				this.send(new ServerMessageConnectionError("Pseudo trop long !"));
 				this.server.removeClient(this);
 				return;
 			}
 
+			// that seemed okay
 
-			this.user = new DataUser(loginMsg.getUsername());
-			this.server.sendUserList();
-			this.server.sendMessagesList();
-			this.sendWelcomeMessage();
+			this.user = new DataUser(loginMsg.getUsername()); // we create the real user
+			this.server.sendUserList();     // we send the updated user list to the clients
+			//this.server.sendMessagesList(); // we send the messages to the client
+			this.send(new ServerMessageMessages(server.getMessages())); // we send the messages to the client
+			this.sendWelcomeMessage();      // we send the welcome message
 
 			while(true) {
 				ClientMessage message = this.read();

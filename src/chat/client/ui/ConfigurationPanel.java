@@ -1,6 +1,3 @@
-/*
- * 
- */
 package chat.client.ui;
 
 import java.awt.GridBagConstraints;
@@ -13,37 +10,38 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class ConfigurationPanel.
+ * The panel allowing the user configure the server, the port, it's name, and
+ * to log in.
  */
+
 public class ConfigurationPanel extends JPanel {
 
-	/** The username. */
-	private Field  username;
-	
-	/** The ip. */
-	private Field  ip;
-	
-	/** The port. */
-	private Field  port;
-	
-	/** The btn login. */
+	/** The username */
+	private Field username;
+
+	/** The ip */
+	private Field ip;
+
+	/** The port */
+	private Field port;
+
+	/** The login button */
 	private Button btnLogin;
 
-	/** The layout. */
-	private GridBagLayout      layout;
-	
-	/** The gbc. */
+	/** The layout */
+	private GridBagLayout layout;
+
+	/** The grid constraints */
 	private GridBagConstraints gbc;
 
-	/** The window. */
+	/** The window */
 	private MainWindow window;
 
 	/**
 	 * Instantiates a new configuration panel.
 	 *
-	 * @param window the window
+	 * @param window the window the panel is displayed on.
 	 */
 	public ConfigurationPanel(final MainWindow window) {
 		this.window = window;
@@ -53,11 +51,12 @@ public class ConfigurationPanel extends JPanel {
 
 		this.setLayout(this.layout);
 
-		this.username = new Field(" Nom",  "pseudo");
-		this.ip       = new Field("  IP",   "127.0.0.1");
+		this.username = new Field(" Nom", "pseudo");
+		this.ip       = new Field("  IP", "127.0.0.1");
 		this.port     = new Field("Port", "5890");
 		this.btnLogin = new Button("Connexion");
 
+		// add the action when the login button is clicked
 		this.btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				int portValue    = 0;
@@ -76,18 +75,32 @@ public class ConfigurationPanel extends JPanel {
 					this.displayError(res);
 				}
 				else {
-					// en fait, c'est relou this.displayInfo("Connected !");
+					// en fait, c'est relou
+					// this.displayInfo("Connected !");
 				}
 			}
 
+			/**
+			 * Display a dialog box with an error message.
+			 * @param message the error messaye to display
+			 */
 			public void displayError(String message) {
 				display(message, JOptionPane.ERROR_MESSAGE);
 			}
 
+			/**
+			 * Display a dialog box with an information message.
+			 * @param message the error messaye to display
+			 */
 			public void displayInfo(String message) {
 				display(message, JOptionPane.INFORMATION_MESSAGE);
 			}
 
+			/**
+			 * Display a dialog box with a message and an option pane.
+			 * @param message the error messaye to display
+			 * @param option  the option pane (JOptionPane) to choose.
+			 */
 			private void display(String message, int option) {
 				JOptionPane.showMessageDialog(new JFrame(), message, "Information", option);
 			}
@@ -115,8 +128,9 @@ public class ConfigurationPanel extends JPanel {
 		this.add(this.port,     gbc);
 	}
 
-	/* (non-Javadoc)
-	 * @see javax.swing.JComponent#addNotify()
+	/**
+	 * Says the login button is selected, so when the user
+	 * press the "enter" key, he is connected.
 	 */
 	@Override
 	public void addNotify() {

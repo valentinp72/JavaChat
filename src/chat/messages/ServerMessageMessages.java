@@ -2,17 +2,16 @@ package chat.messages;
 
 import java.util.List;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class ServerMessageMessages.
+ * This class represents a message the server send to tell the clients all the messages of the chat.
  */
 public class ServerMessageMessages extends ServerMessage {
 
-	/** The messages. */
+	/** The messages */
 	private List<DataMessage> messages;
 
 	/**
-	 * Instantiates a new server message messages.
+	 * Instantiates a new server messages message.
 	 *
 	 * @param messages the messages
 	 */
@@ -29,8 +28,9 @@ public class ServerMessageMessages extends ServerMessage {
 		return this.messages;
 	}
 
-	/* (non-Javadoc)
-	 * @see chat.messages.Message#toString()
+	/**
+	 * Returns the server message
+	 * @return the server message
 	 */
 	public String toString() {
 		return toString(messages);

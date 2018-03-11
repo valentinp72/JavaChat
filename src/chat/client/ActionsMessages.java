@@ -5,35 +5,38 @@ import java.util.List;
 import chat.messages.DataMessage;
 import chat.messages.DataUser;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Interface ActionsMessages.
+ * The interface that every wants to make actions when the client receive a message
+ * must complains.
  */
 public interface ActionsMessages {
-	
+
 	/**
-	 * New message.
+	 * This method is called when the client receives a new message to
+	 * be saved by the server.
 	 *
-	 * @param message the message
+	 * @param message the new message
 	 */
 	public void newMessage(DataMessage message);
-	
+
 	/**
-	 * Sets the messages.
+	 * This method is called when the client receives a new set of messages to
+	 * replace the current messages.
 	 *
 	 * @param messages the new messages
 	 */
 	public void setMessages(List<DataMessage> messages);
-	
+
 	/**
-	 * Sets the users.
+	 * This method is called when the client receives the new list
+	 * of users by the server.
 	 *
 	 * @param users the new users
 	 */
 	public void setUsers(List<DataUser> users);
-	
+
 	/**
-	 * Connection error.
+	 * This method is called when the client receives an error at the login.
 	 *
 	 * @param error the error
 	 */

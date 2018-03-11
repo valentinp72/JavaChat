@@ -21,16 +21,16 @@ public class Server {
 
 	/** The port. */
 	private int port;
-	
+
 	/** The host. */
 	private String host;
 
 	/** The messages. */
 	private List<DataMessage> messages;
-	
+
 	/** The clients. */
 	private List<ClientThread> clients;
-	
+
 	/** The server. */
 	private ServerSocket server;
 
@@ -153,6 +153,10 @@ public class Server {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	public List<DataMessage> getMessages() {
+		return this.messages;
 	}
 
 }

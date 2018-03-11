@@ -1,8 +1,7 @@
 package chat.messages;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class ClientMessageLogout.
+ * This class represents a message the client sends to the server to tell goodbye.
  */
 public class ClientMessageLogout extends ClientMessage {
 

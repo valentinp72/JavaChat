@@ -1,6 +1,3 @@
-/*
- * 
- */
 package chat.client.ui;
 
 import java.awt.Color;
@@ -11,17 +8,17 @@ import javax.swing.table.AbstractTableModel;
 
 import chat.messages.DataMessage;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class MessagesTableModel.
+ * This class tells the model to be used by the JTable to display the messages.
  */
+
 public class MessagesTableModel extends AbstractTableModel {
 
-	/** The messages. */
+	/** The messages */
 	private List<DataMessage> messages;
-	
-	/** The header. */
-	private final String[]    header;
+
+	/** The header */
+	private final String[] header;
 
 	/**
 	 * Instantiates a new messages table model.
@@ -34,29 +31,33 @@ public class MessagesTableModel extends AbstractTableModel {
 
 	}
 
-	/* (non-Javadoc)
-	 * @see javax.swing.table.TableModel#getRowCount()
+	/**
+	 * Returns the number of rows in the table.
+	 * @return the number of rows in the table.
 	 */
 	public int getRowCount() {
 		return this.messages.size();
 	}
 
-	/* (non-Javadoc)
-	 * @see javax.swing.table.TableModel#getColumnCount()
+	/**
+	 * Returns the number of columns in the table.
+	 * @return the number of columns in the table.
 	 */
 	public int getColumnCount() {
 		return this.header.length;
 	}
 
-	/* (non-Javadoc)
-	 * @see javax.swing.table.AbstractTableModel#getColumnName(int)
+	/**
+	 * Returns the name of the column at the given index
+	 * @return the name of the column at the given index
 	 */
 	public String getColumnName(int column) {
 		return this.header[column];
 	}
 
-	/* (non-Javadoc)
-	 * @see javax.swing.table.TableModel#getValueAt(int, int)
+	/**
+	 * Returns the value at the given coordinates in the table.
+	 * @return the value at the given coordinates in the table.
 	 */
 	public Object getValueAt(int row, int column) {
 		DataMessage message = this.messages.get(row);
@@ -74,7 +75,9 @@ public class MessagesTableModel extends AbstractTableModel {
 	}
 
 	/**
-	 * Gets the color at.
+	 * Returns the color to be displayed at the given cell.
+	 * It always return BLACK, except if the column is the username one. It then
+	 * returns the color of the sending user.
 	 *
 	 * @param row the row
 	 * @param column the column
@@ -88,9 +91,9 @@ public class MessagesTableModel extends AbstractTableModel {
 	}
 
 	/**
-	 * Adds the message.
+	 * Adds a message to the table.
 	 *
-	 * @param message the message
+	 * @param message the message to add
 	 */
 	public void addMessage(DataMessage message) {
 		this.messages.add(message);
@@ -99,7 +102,7 @@ public class MessagesTableModel extends AbstractTableModel {
 	}
 
 	/**
-	 * Sets the messages.
+	 * Sets the messages to be displayed
 	 *
 	 * @param messages the new messages
 	 */

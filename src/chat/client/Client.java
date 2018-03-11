@@ -12,34 +12,34 @@ import chat.messages.ClientMessageLogin;
 import chat.messages.ClientMessageLogout;
 import chat.messages.ServerMessage;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class Client.
+ * The main client class. This class takes care of receiving and sending
+ * messages to the server. It also connect and disconnect to the servers.
  */
 public class Client {
 
-	/** The server IP. */
+	/** The server IP */
 	private InetAddress serverIP;
-	
-	/** The client name. */
-	private String      clientName;
-	
-	/** The server port. */
-	private int         serverPort;
 
-	/** The socket. */
+	/** The client name */
+	private String clientName;
+
+	/** The server port */
+	private int serverPort;
+
+	/** The server socket */
 	private Socket socket;
-	
-	/** The writer. */
+
+	/** The writer to the server */
 	private ObjectOutputStream writer;
-	
-	/** The reader. */
-	private ObjectInputStream  reader;
-	
-	/** The thread. */
+
+	/** The reader to the server */
+	private ObjectInputStream reader;
+
+	/** The thread the client will be listening for the server */
 	private ServerThread thread;
 
-	/** The actions messages. */
+	/** The actions to do when messages are comming */
 	private ActionsMessages actionsMessages;
 
 	/**
@@ -61,7 +61,7 @@ public class Client {
 	}
 
 	/**
-	 * Connect.
+	 * Connect to the server by creating a new socket.
 	 *
 	 * @return the socket
 	 * @throws IOException Signals that an I/O exception has occurred.
@@ -88,7 +88,7 @@ public class Client {
 	}
 
 	/**
-	 * Disconnect.
+	 * Disconnect to the server.
 	 */
 	public void disconnect() {
 		if(this.socket != null) {
@@ -107,7 +107,7 @@ public class Client {
 	}
 
 	/**
-	 * Send.
+	 * Send a ClientMessage to the server
 	 *
 	 * @param message the message
 	 * @return true, if successful
@@ -124,7 +124,9 @@ public class Client {
 	}
 
 	/**
-	 * Read.
+	 * Read a ServerMessage from the server. This is a blocking method.
+	 * If there is an error (the received message is not a ServerMessage)
+	 * this returns null.
 	 *
 	 * @return the server message
 	 * @throws IOException Signals that an I/O exception has occurred.
@@ -139,18 +141,18 @@ public class Client {
 	}
 
 	/**
-	 * Sets the action messages.
+	 * Sets the action to be done when receiving messages.
 	 *
-	 * @param action the new action messages
+	 * @param action the new actions
 	 */
 	public void setActionMessages(ActionsMessages action) {
 		this.actionsMessages = action;
 	}
 
 	/**
-	 * Gets the actions messages.
+	 * Gets the actions.
 	 *
-	 * @return the actions messages
+	 * @return the actions
 	 */
 	public ActionsMessages getActionsMessages() {
 		return this.actionsMessages;

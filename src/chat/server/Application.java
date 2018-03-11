@@ -1,9 +1,9 @@
 package chat.server;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class Application.
+ * The server application main programm.
  */
+
 public class Application {
 
 	/**
@@ -15,7 +15,7 @@ public class Application {
 	}
 
 	/**
-	 * The main method.
+	 * The main program.
 	 *
 	 * @param args the arguments
 	 */

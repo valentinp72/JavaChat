@@ -10,22 +10,22 @@ import chat.messages.ServerMessageMessages;
 import chat.messages.ServerMessageNewMessage;
 import chat.messages.ServerMessageUsers;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class ServerThread.
+ * This class runs a thread that listens for server messages
  */
+
 public class ServerThread implements Runnable {
 
-	/** The client. */
+	/** The client */
 	private Client client;
-	
-	/** The socket. */
+
+	/** The socket */
 	private Socket socket;
-	
-	/** The thread. */
+
+	/** The thread */
 	private Thread thread;
-	
-	/** The running. */
+
+	/** The running */
 	private boolean running;
 
 	/**
@@ -44,15 +44,16 @@ public class ServerThread implements Runnable {
 	}
 
 	/**
-	 * Stop.
+	 * Stop to listen messages.
 	 */
 	public void stop() {
 		this.running = false;
 		this.thread.interrupt();
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Runnable#run()
+	/*
+	 * Run the thread. This gets messages from the server
+	 * and take actions from them.
 	 */
 	public void run() {
 		System.out.println("Connecté!");
@@ -67,6 +68,7 @@ public class ServerThread implements Runnable {
 						ServerMessage message = client.read();
 
 						System.out.println(message.toString());
+
 						if(message instanceof ServerMessageMessages) {
 							ServerMessageMessages msg = (ServerMessageMessages) message;
 							actions.setMessages(msg.getMessages());
@@ -85,8 +87,6 @@ public class ServerThread implements Runnable {
 						}
 
 					}
-					System.out.println("action:" + actions);
-
 
 				}
 				catch(SocketException e) {

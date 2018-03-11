@@ -7,9 +7,9 @@ import javax.swing.JList;
 
 import chat.messages.DataUser;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class ListCellRenderer.
+ * This class allows a JList to have a foreground if it contains a DataUser.
+ * The choosen color is the color of the user.
  */
 public class ListCellRenderer extends DefaultListCellRenderer {
 

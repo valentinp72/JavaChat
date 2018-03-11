@@ -1,16 +1,16 @@
 package chat.messages;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class ServerMessageNewMessage.
+ * This class represents a message the server send to the
+ * clients when there is a new message on the chat.
  */
 public class ServerMessageNewMessage extends ServerMessage {
 
-	/** The message. */
+	/** The new message */
 	private DataMessage message;
 
 	/**
-	 * Instantiates a new server message new message.
+	 * Instantiates a new server new message messages (lol "_").
 	 *
 	 * @param message the message
 	 */
@@ -19,7 +19,7 @@ public class ServerMessageNewMessage extends ServerMessage {
 	}
 
 	/**
-	 * Gets the message.
+	 * Gets the new message.
 	 *
 	 * @return the message
 	 */
@@ -27,8 +27,9 @@ public class ServerMessageNewMessage extends ServerMessage {
 		return this.message;
 	}
 
-	/* (non-Javadoc)
-	 * @see chat.messages.Message#toString()
+	/**
+	 * Returns the server message
+	 * @return the server message
 	 */
 	public String toString() {
 		return toString(message);

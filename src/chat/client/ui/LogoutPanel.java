@@ -1,6 +1,3 @@
-/*
- * 
- */
 package chat.client.ui;
 
 import java.awt.GridLayout;
@@ -9,16 +6,16 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class LogoutPanel.
+ * The logout panel. This allows the user to click on a logout button, and to be
+ * redirected to the login frame.
  */
 public class LogoutPanel extends JPanel {
 
-	/** The btn logout. */
+	/** The btn logout */
 	private Button btnLogout;
 
-	/** The window. */
+	/** The window */
 	private MainWindow window;
 
 	/**

@@ -2,24 +2,26 @@ package chat.messages;
 
 import java.io.Serializable;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class Message.
+ * This class is the core component of a message the
+ * client and the server can send an receive.
  */
+
 public abstract class Message implements Serializable {
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
+	/**
+	 * Returns the message class anme
+	 * @return the message class name
 	 */
 	public String toString() {
 		return this.getClass().getSimpleName();
 	}
 
 	/**
-	 * To string.
+	 * Returns the message with a parameter (className='parameter')
 	 *
 	 * @param parameter the parameter
-	 * @return the string
+	 * @return the message
 	 */
 	public String toString(Object parameter) {
 		return this.getClass().getSimpleName() + "='" + parameter.toString() + "'";

@@ -1,25 +1,25 @@
 package chat.messages;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class ServerMessageConnectionError.
+ * This message is sent by the server when there is a connection error.
  */
+
 public class ServerMessageConnectionError extends ServerMessage {
 
-	/** The explanation. */
+	/** The explanation of the error */
 	private String explanation;
 
 	/**
-	 * Instantiates a new server message connection error.
+	 * Instantiates a new server connection error message.
 	 *
-	 * @param explanation the explanation
+	 * @param explanation the explanation of the errror
 	 */
 	public ServerMessageConnectionError(String explanation) {
 		this.explanation = explanation;
 	}
 
 	/**
-	 * Gets the explanation.
+	 * Gets the explanation of the error
 	 *
 	 * @return the explanation
 	 */
@@ -27,8 +27,9 @@ public class ServerMessageConnectionError extends ServerMessage {
 		return this.explanation;
 	}
 
-	/* (non-Javadoc)
-	 * @see chat.messages.Message#toString()
+	/**
+	 * Returns the server message
+	 * @return the server message
 	 */
 	public String toString() {
 		return toString(explanation);

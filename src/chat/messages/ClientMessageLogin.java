@@ -1,12 +1,11 @@
 package chat.messages;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class ClientMessageLogin.
+ * This class represents a hello from the client to the server.
  */
 public class ClientMessageLogin extends ClientMessage {
 
-	/** The username. */
+	/** The username */
 	private String username;
 
 	/**
@@ -27,8 +26,9 @@ public class ClientMessageLogin extends ClientMessage {
 		return this.username;
 	}
 
-	/* (non-Javadoc)
-	 * @see chat.messages.Message#toString()
+	/**
+	 * Returns the client message
+	 * @return the client message
 	 */
 	public String toString() {
 		return toString(username);

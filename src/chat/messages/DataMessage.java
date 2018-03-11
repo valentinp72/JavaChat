@@ -5,29 +5,28 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class DataMessage.
+ * This class represents the content of a message, both used by the server and the client.
  */
 public class DataMessage implements Serializable {
 
-	/** The user. */
-	private DataUser   user;
-	
-	/** The message. */
-	private String     message;
-	
-	/** The time. */
-	private Date       time;
-	
-	/** The dformat. */
+	/** The user that sent the message*/
+	private DataUser user;
+
+	/** The content of the message */
+	private String message;
+
+	/** The date the message has been made*/
+	private Date time;
+
+	/** The format to display the date */
 	private DateFormat dformat;
 
 	/**
-	 * Instantiates a new data message.
+	 * Instantiates a new message.
 	 *
-	 * @param user the user
-	 * @param message the message
+	 * @param user the sender
+	 * @param message the message contents
 	 */
 	public DataMessage(DataUser user, String message) {
 		this.user     = user;
@@ -36,8 +35,9 @@ public class DataMessage implements Serializable {
 		this.dformat  = new SimpleDateFormat("HH:mm");
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
+	/**
+	 * Returns the message
+	 * @return the message
 	 */
 	public String toString() {
 		return "[" + this.user + " | " + this.time + "] - " + this.message;

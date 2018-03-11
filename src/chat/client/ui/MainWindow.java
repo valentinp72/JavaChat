@@ -1,6 +1,3 @@
-/*
- * 
- */
 package chat.client.ui;
 
 import java.awt.BorderLayout;
@@ -17,29 +14,29 @@ import chat.messages.ClientMessageMessage;
 import chat.messages.DataMessage;
 import chat.messages.DataUser;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class MainWindow.
+ * The main window of the application. This displays either a configuration panel to allow login,
+ * either a discussion panel to allow discussion.
  */
 public class MainWindow extends JFrame {
 
-	/** The client. */
+	/** The client */
 	private Client client;
 
-	/** The panel config. */
+	/** The config panel */
 	private ConfigurationPanel panelConfig;
-	
-	/** The panel connected. */
-	private ConnectedPanel     panelConnected;
-	
-	/** The panel discussion. */
-	private DiscussionPanel    panelDiscussion;
-	
-	/** The panel logout. */
-	private LogoutPanel        panelLogout;
+
+	/** The connected panel */
+	private ConnectedPanel panelConnected;
+
+	/** The discussion panel */
+	private DiscussionPanel panelDiscussion;
+
+	/** The logout panel */
+	private LogoutPanel panelLogout;
 
 	/**
-	 * Instantiates a new main window.
+	 * Instantiates a new window.
 	 */
 	public MainWindow() {
 		super();
@@ -63,12 +60,12 @@ public class MainWindow extends JFrame {
 	}
 
 	/**
-	 * Sets the client.
+	 * Sets the client of the window.
 	 *
-	 * @param ip the ip
-	 * @param port the port
-	 * @param username the username
-	 * @return the string
+	 * @param ip the ip to connect on
+	 * @param port the port of the server
+	 * @param username the username to login
+	 * @return a String: if connected "OK", else an explaination of the error
 	 */
 	public String setClient(String ip, int port, String username) {
 		try {
@@ -79,19 +76,27 @@ public class MainWindow extends JFrame {
 			this.repaint();
 			this.setVisible(true);
 
+			// we ask the client to do theses actions when the client
+			// receive something
+			// this allows a MVC-like pattern, the client does not
+			// know anything about the UI
 			this.client.setActionMessages(new ActionsMessages() {
+				// action when a new message occurs
 				public void newMessage(DataMessage message) {
 					panelDiscussion.addMessage(message);
 				}
 
+				// action when the server wants to reset all the messages
 				public void setMessages(List<DataMessage> messages) {
 					panelDiscussion.setMessages(messages);
 				}
 
+				// action when the server sends the new user list
 				public void setUsers(List<DataUser> users) {
 					panelConnected.setUsers(users);
 				}
 
+				// action when the server send a connection error
 				public void connectionError(String error) {
 					resetClient();
 					JOptionPane.showMessageDialog(
@@ -113,7 +118,8 @@ public class MainWindow extends JFrame {
 	}
 
 	/**
-	 * Reset client.
+	 * Reset client. This closes the connection and update the UI to be
+	 * back to the login panel.
 	 */
 	public void resetClient() {
 		if(this.client != null) {
@@ -128,7 +134,7 @@ public class MainWindow extends JFrame {
 	}
 
 	/**
-	 * Send message.
+	 * Send a new message to the server.
 	 *
 	 * @param message the message
 	 * @return true, if successful
@@ -143,9 +149,9 @@ public class MainWindow extends JFrame {
 	}
 
 	/**
-	 * Gets the panel connected.
+	 * Gets the connected panel.
 	 *
-	 * @return the panel connected
+	 * @return the connected apnel
 	 */
 	public ConnectedPanel getPanelConnected() {
 		return this.panelConnected;

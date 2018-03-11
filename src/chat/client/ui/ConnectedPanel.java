@@ -1,6 +1,3 @@
-/*
- * 
- */
 package chat.client.ui;
 
 import java.awt.BorderLayout;
@@ -13,17 +10,17 @@ import javax.swing.JScrollPane;
 
 import chat.messages.DataUser;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class ConnectedPanel.
+ * The UI listing all the connected users to the chat.
  */
+
 public class ConnectedPanel extends JPanel {
 
-	/** The scroll. */
-	private JScrollPane    scroll;
-	
-	/** The list. */
-	private JList<DataUser>  list;
+	/** The scroll pane, allowing to scroll if the window is not big enough */
+	private JScrollPane scroll;
+
+	/** The list of connected users */
+	private JList<DataUser> list;
 
 	/**
 	 * Instantiates a new connected panel.
@@ -42,7 +39,7 @@ public class ConnectedPanel extends JPanel {
 	}
 
 	/**
-	 * Sets the users.
+	 * Sets the users to be displayed on the panel
 	 *
 	 * @param content the new users
 	 */
@@ -51,7 +48,7 @@ public class ConnectedPanel extends JPanel {
 	}
 
 	/**
-	 * Sets the users.
+	* Sets the users to be displayed on the panel
 	 *
 	 * @param content the new users
 	 */

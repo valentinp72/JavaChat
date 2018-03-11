@@ -1,6 +1,3 @@
-/*
- * 
- */
 package chat.client.ui;
 
 import java.awt.Component;
@@ -9,10 +6,11 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.table.TableCellRenderer;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class WrapTableCellRenderer.
+ * This class wraps the content of a JTextArea in a table if the
+ * line is too long to be displayed.
  */
+
 public class WrapTableCellRenderer extends JTextArea implements TableCellRenderer {
 
 	/**
@@ -23,8 +21,15 @@ public class WrapTableCellRenderer extends JTextArea implements TableCellRendere
 		this.setWrapStyleWord(true);
 	}
 
-	/* (non-Javadoc)
-	 * @see javax.swing.table.TableCellRenderer#getTableCellRendererComponent(javax.swing.JTable, java.lang.Object, boolean, boolean, int, int)
+	/**
+	 * Update the row height if the content is too wide
+	 * to be displayed in the cell.
+	 * @param table the table
+	 * @param value the value of the cell
+	 * @param isSelected true if the cell is selected
+	 * @param hasFocus   true if the cell has focus
+	 * @param row    the current row
+	 * @param column the current column
 	 */
 	public Component getTableCellRendererComponent(
 		JTable table,

@@ -1,20 +1,17 @@
-/*
- * 
- */
 package chat.client.ui;
 
 import javax.swing.JButton;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class Button.
+ * The Button button class (pretty useless).
  */
+
 public class Button extends JButton {
 
 	/**
 	 * Instantiates a new button.
 	 *
-	 * @param name the name
+	 * @param name the name to put in the button
 	 */
 	public Button(String name) {
 		super(name);

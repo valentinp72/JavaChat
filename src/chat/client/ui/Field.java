@@ -1,6 +1,3 @@
-/*
- * 
- */
 package chat.client.ui;
 
 import java.awt.Dimension;
@@ -9,22 +6,21 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class Field.
+ * The Field class is a class with a JTextField and a JLabel displaying information.
  */
 public class Field extends JPanel {
 
-	/** The label. */
-	private JLabel     label;
-	
-	/** The field. */
+	/** The label */
+	private JLabel label;
+
+	/** The field */
 	private JTextField field;
 
 	/**
 	 * Instantiates a new field.
 	 *
-	 * @param name the name
+	 * @param name the name of the field
 	 */
 	public Field(String name) {
 		this.label = new JLabel(name + " : ");
@@ -37,10 +33,10 @@ public class Field extends JPanel {
 	}
 
 	/**
-	 * Instantiates a new field.
+	 * Instantiates a new field with a default value for the field
 	 *
-	 * @param name the name
-	 * @param value the value
+	 * @param name the name of the field
+	 * @param value the default value
 	 */
 	public Field(String name, String value) {
 		this(name);
@@ -48,7 +44,7 @@ public class Field extends JPanel {
 	}
 
 	/**
-	 * Sets the preferred size.
+	 * Sets the preferred size of the field
 	 *
 	 * @param x the x
 	 * @param y the y
@@ -58,7 +54,7 @@ public class Field extends JPanel {
 	}
 
 	/**
-	 * Gets the text.
+	 * Gets the text that is set by the user in the field.
 	 *
 	 * @return the text
 	 */
@@ -67,7 +63,7 @@ public class Field extends JPanel {
 	}
 
 	/**
-	 * Gets the int.
+	 * Gets the integer in the field
 	 *
 	 * @return the int
 	 * @throws NumberFormatException the number format exception

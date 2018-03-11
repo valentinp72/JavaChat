@@ -2,17 +2,18 @@ package chat.messages;
 
 import java.util.List;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class ServerMessageUsers.
+ * This class represents a message of the server when it's time for
+ * the clients to update the user list.
  */
+
 public class ServerMessageUsers extends ServerMessage {
 
-	/** The users. */
+	/** The users */
 	private List<DataUser> users;
 
 	/**
-	 * Instantiates a new server message users.
+	 * Instantiates a new server users message.
 	 *
 	 * @param users the users
 	 */
@@ -29,8 +30,9 @@ public class ServerMessageUsers extends ServerMessage {
 		return this.users;
 	}
 
-	/* (non-Javadoc)
-	 * @see chat.messages.Message#toString()
+	/**
+	 * Returns the server message
+	 * @return the server message
 	 */
 	public String toString() {
 		return toString(users);
