@@ -1,12 +1,14 @@
 package chat.client.ui;
 
-import chat.messages.DataUser;
 import java.awt.BorderLayout;
 import java.util.List;
+
 import javax.swing.BorderFactory;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+
+import chat.messages.DataUser;
 
 public class ConnectedPanel extends JPanel {
 

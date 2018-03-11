@@ -1,6 +1,5 @@
 package chat.messages;
 
-import java.util.Random;
 import java.awt.Color;
 import java.io.Serializable;
 

@@ -1,9 +1,11 @@
 package chat.client.ui;
 
-import chat.messages.DataUser;
 import java.awt.Component;
+
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JList;
+
+import chat.messages.DataUser;
 
 public class ListCellRenderer extends DefaultListCellRenderer {
 

@@ -1,8 +1,9 @@
 package chat.client;
 
+import java.util.List;
+
 import chat.messages.DataMessage;
 import chat.messages.DataUser;
-import java.util.List;
 
 public interface ActionsMessages {
 	public void newMessage(DataMessage message);

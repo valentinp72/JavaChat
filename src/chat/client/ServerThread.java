@@ -10,7 +10,6 @@ import chat.messages.ServerMessageMessages;
 import chat.messages.ServerMessageNewMessage;
 import chat.messages.ServerMessageUsers;
 
-
 public class ServerThread implements Runnable {
 
 	private Client client;

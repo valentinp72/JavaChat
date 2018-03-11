@@ -1,6 +1,5 @@
 package chat.client.ui;
 
-import chat.messages.DataMessage;
 import java.awt.Adjustable;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -9,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
 import java.util.List;
+
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -20,6 +20,8 @@ import javax.swing.JTextArea;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
+
+import chat.messages.DataMessage;
 
 public class DiscussionPanel extends JPanel {
 
