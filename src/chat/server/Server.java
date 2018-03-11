@@ -13,15 +13,30 @@ import chat.messages.ServerMessageMessages;
 import chat.messages.ServerMessageNewMessage;
 import chat.messages.ServerMessageUsers;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Server.
+ */
 public class Server {
 
+	/** The port. */
 	private int port;
+	
+	/** The host. */
 	private String host;
 
+	/** The messages. */
 	private List<DataMessage> messages;
+	
+	/** The clients. */
 	private List<ClientThread> clients;
+	
+	/** The server. */
 	private ServerSocket server;
 
+	/**
+	 * Instantiates a new server.
+	 */
 	public Server() {
 		try {
 			this.host     = "127.0.0.1";
@@ -40,15 +55,30 @@ public class Server {
 
 	}
 
+	/**
+	 * Adds the client.
+	 *
+	 * @param client the client
+	 */
 	public void addClient(Socket client) {
 		ClientThread thread = new ClientThread(client, this);
 		clients.add(thread);
 	}
 
+	/**
+	 * Removes the client.
+	 *
+	 * @param client the client
+	 */
 	public void removeClient(ClientThread client) {
 		clients.remove(client);
 	}
 
+	/**
+	 * Gets the users.
+	 *
+	 * @return the users
+	 */
 	public List<DataUser> getUsers() {
 		List<DataUser> users = new ArrayList<DataUser>();
 		for(ClientThread client : clients) {
@@ -59,6 +89,11 @@ public class Server {
 		return users;
 	}
 
+	/**
+	 * Gets the usernames.
+	 *
+	 * @return the usernames
+	 */
 	public List<String> getUsernames() {
 		List<String> usernames = new ArrayList<String>();
 		for(DataUser user : this.getUsers()) {
@@ -67,28 +102,47 @@ public class Server {
 		return usernames;
 	}
 
+	/**
+	 * Send user list.
+	 */
 	public void sendUserList() {
 		List<DataUser> users = this.getUsers();
 		this.sendServerMsgToClients(new ServerMessageUsers(users));
 	}
 
+	/**
+	 * Adds the message.
+	 *
+	 * @param message the message
+	 */
 	public void addMessage(DataMessage message) {
 		this.messages.add(message);
 		ServerMessageNewMessage msg = new ServerMessageNewMessage(message);
 		this.sendServerMsgToClients(msg);
 	}
 
+	/**
+	 * Send messages list.
+	 */
 	public void sendMessagesList() {
 		ServerMessageMessages msgs = new ServerMessageMessages(this.messages);
 		this.sendServerMsgToClients(msgs);
 	}
 
+	/**
+	 * Send server msg to clients.
+	 *
+	 * @param msg the msg
+	 */
 	public void sendServerMsgToClients(ServerMessage msg) {
 		for(ClientThread client : clients) {
 			client.send(msg);
 		}
 	}
 
+	/**
+	 * Run.
+	 */
 	public void run() {
 		while(true) {
 			try {

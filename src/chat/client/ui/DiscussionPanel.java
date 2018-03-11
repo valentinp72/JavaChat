@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package chat.client.ui;
 
 import java.awt.Adjustable;
@@ -23,20 +26,44 @@ import javax.swing.text.PlainDocument;
 
 import chat.messages.DataMessage;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DiscussionPanel.
+ */
 public class DiscussionPanel extends JPanel {
 
+	/** The layout. */
 	private GridBagLayout layout;
+	
+	/** The gbc. */
 	private GridBagConstraints gbc;
+	
+	/** The btn send. */
 	private Button     btnSend;
+	
+	/** The message. */
 	private JTextArea  message;
 
+	/** The conversation. */
 	private JTable conversation;
+	
+	/** The scroll pane. */
 	private JScrollPane scrollPane;
+	
+	/** The table model. */
 	private MessagesTableModel tableModel;
+	
+	/** The panel connected. */
 	private ConnectedPanel panelConnected;
 
+	/** The window. */
 	private MainWindow window;
 
+	/**
+	 * Instantiates a new discussion panel.
+	 *
+	 * @param window the window
+	 */
 	public DiscussionPanel(MainWindow window) {
 		this.window = window;
 		this.layout = new GridBagLayout();
@@ -80,6 +107,9 @@ public class DiscussionPanel extends JPanel {
 		this.add(btnSend, gbc);
 	}
 
+	/**
+	 * Creates the message area.
+	 */
 	private void createMessageArea() {
 		this.message = new JTextArea("Message");
 		this.message.setRows(1);
@@ -102,6 +132,9 @@ public class DiscussionPanel extends JPanel {
 		});
 	}
 
+	/**
+	 * Creates the table area.
+	 */
 	private void createTableArea() {
 		this.tableModel   = new MessagesTableModel();
 		this.conversation = new JTable(this.tableModel);
@@ -114,6 +147,9 @@ public class DiscussionPanel extends JPanel {
 		this.scrollPane = new JScrollPane(conversation);
 	}
 
+	/**
+	 * Creates the send area.
+	 */
 	private void createSendArea() {
 		this.btnSend = new Button("Envoyer");
 		this.btnSend.addActionListener(new ActionListener() {
@@ -134,6 +170,9 @@ public class DiscussionPanel extends JPanel {
 		});
 	}
 
+	/**
+	 * Show last message.
+	 */
 	private void showLastMessage() {
 		// https://stackoverflow.com/a/31317110/7625364
 		final JScrollBar verticalBar = scrollPane.getVerticalScrollBar();
@@ -147,11 +186,21 @@ public class DiscussionPanel extends JPanel {
 	    verticalBar.addAdjustmentListener(downScroller);
 	}
 
+	/**
+	 * Adds the message.
+	 *
+	 * @param message the message
+	 */
 	public void addMessage(DataMessage message) {
 		this.tableModel.addMessage(message);
 		this.showLastMessage();
 	}
 
+	/**
+	 * Sets the messages.
+	 *
+	 * @param messages the new messages
+	 */
 	public void setMessages(List<DataMessage> messages) {
 		this.tableModel.setMessages(messages);
 		this.showLastMessage();

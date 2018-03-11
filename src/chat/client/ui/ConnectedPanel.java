@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package chat.client.ui;
 
 import java.awt.BorderLayout;
@@ -10,11 +13,23 @@ import javax.swing.JScrollPane;
 
 import chat.messages.DataUser;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ConnectedPanel.
+ */
 public class ConnectedPanel extends JPanel {
 
+	/** The scroll. */
 	private JScrollPane    scroll;
+	
+	/** The list. */
 	private JList<DataUser>  list;
 
+	/**
+	 * Instantiates a new connected panel.
+	 *
+	 * @param window the window
+	 */
 	public ConnectedPanel(MainWindow window) {
 		super();
 		this.setLayout(new BorderLayout());
@@ -26,10 +41,20 @@ public class ConnectedPanel extends JPanel {
 		this.add(scroll);
 	}
 
+	/**
+	 * Sets the users.
+	 *
+	 * @param content the new users
+	 */
 	public void setUsers(DataUser[] content) {
 		this.list.setListData(content);
 	}
 
+	/**
+	 * Sets the users.
+	 *
+	 * @param content the new users
+	 */
 	public void setUsers(List<DataUser> content) {
 		this.setUsers(content.toArray(new DataUser[0]));
 	}

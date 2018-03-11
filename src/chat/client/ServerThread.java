@@ -10,13 +10,30 @@ import chat.messages.ServerMessageMessages;
 import chat.messages.ServerMessageNewMessage;
 import chat.messages.ServerMessageUsers;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ServerThread.
+ */
 public class ServerThread implements Runnable {
 
+	/** The client. */
 	private Client client;
+	
+	/** The socket. */
 	private Socket socket;
+	
+	/** The thread. */
 	private Thread thread;
+	
+	/** The running. */
 	private boolean running;
 
+	/**
+	 * Instantiates a new server thread.
+	 *
+	 * @param socket the socket
+	 * @param client the client
+	 */
 	public ServerThread(Socket socket, Client client) {
 		this.socket  = socket;
 		this.client  = client;
@@ -26,11 +43,17 @@ public class ServerThread implements Runnable {
 		this.thread.start();
 	}
 
+	/**
+	 * Stop.
+	 */
 	public void stop() {
 		this.running = false;
 		this.thread.interrupt();
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Runnable#run()
+	 */
 	public void run() {
 		System.out.println("Connecté!");
 		try {

@@ -15,18 +15,39 @@ import chat.messages.ServerMessage;
 import chat.messages.ServerMessageConnectionError;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ClientThread.
+ */
 public class ClientThread implements Runnable {
 
+	/** The Constant ADMIN_USER. */
 	private static final DataUser ADMIN_USER = new DataUser("");
 
+	/** The user. */
 	private DataUser user;
+	
+	/** The thread. */
 	private Thread thread;
+	
+	/** The socket. */
 	private Socket socket;
+	
+	/** The server. */
 	private Server server;
 
+	/** The output. */
 	private ObjectOutputStream output;
+	
+	/** The input. */
 	private ObjectInputStream  input;
 
+	/**
+	 * Instantiates a new client thread.
+	 *
+	 * @param socket the socket
+	 * @param server the server
+	 */
 	public ClientThread(Socket socket, Server server) {
 		this.socket = socket;
 		this.server = server;
@@ -43,6 +64,9 @@ public class ClientThread implements Runnable {
 		this.thread.start();
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Runnable#run()
+	 */
 	public void run() {
 		System.out.println("Nouveau client!");
 		try {
@@ -93,6 +117,11 @@ public class ClientThread implements Runnable {
 		}
 	}
 
+	/**
+	 * Send.
+	 *
+	 * @param msg the msg
+	 */
 	public void send(ServerMessage msg) {
 		try {
 			output.reset();
@@ -103,6 +132,12 @@ public class ClientThread implements Runnable {
 		}
 	}
 
+	/**
+	 * Read.
+	 *
+	 * @return the client message
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	private ClientMessage read() throws IOException {
 		try {
 			return (ClientMessage) input.readObject();
@@ -112,15 +147,26 @@ public class ClientThread implements Runnable {
 		}
 	}
 
+	/**
+	 * Gets the user.
+	 *
+	 * @return the user
+	 */
 	public DataUser getUser() {
 		return this.user;
 	}
 
+	/**
+	 * Send welcome message.
+	 */
 	public void sendWelcomeMessage() {
 		DataMessage msg = new DataMessage(ADMIN_USER, user.toString() + " vient de rejoindre.");
 		this.server.addMessage(msg);
 	}
 
+	/**
+	 * Send goodbye message.
+	 */
 	public void sendGoodbyeMessage() {
 		DataMessage msg = new DataMessage(ADMIN_USER, user.toString() + " vient de quitter.");
 		this.server.addMessage(msg);

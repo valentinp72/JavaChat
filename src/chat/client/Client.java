@@ -12,19 +12,45 @@ import chat.messages.ClientMessageLogin;
 import chat.messages.ClientMessageLogout;
 import chat.messages.ServerMessage;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Client.
+ */
 public class Client {
 
+	/** The server IP. */
 	private InetAddress serverIP;
+	
+	/** The client name. */
 	private String      clientName;
+	
+	/** The server port. */
 	private int         serverPort;
 
+	/** The socket. */
 	private Socket socket;
+	
+	/** The writer. */
 	private ObjectOutputStream writer;
+	
+	/** The reader. */
 	private ObjectInputStream  reader;
+	
+	/** The thread. */
 	private ServerThread thread;
 
+	/** The actions messages. */
 	private ActionsMessages actionsMessages;
 
+	/**
+	 * Instantiates a new client.
+	 *
+	 * @param serverIP the server IP
+	 * @param serverPort the server port
+	 * @param clientName the client name
+	 * @throws UnknownHostException the unknown host exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public Client(String serverIP, int serverPort, String clientName)
 		throws UnknownHostException, IOException {
 			this.serverIP   = InetAddress.getByName(serverIP);
@@ -34,6 +60,12 @@ public class Client {
 			this.thread     = new ServerThread(this.socket, this);
 	}
 
+	/**
+	 * Connect.
+	 *
+	 * @return the socket
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	private Socket connect() throws IOException {
 		// Use system proxies
 		System.setProperty("java.net.useSystemProxies", "true");
@@ -55,6 +87,9 @@ public class Client {
 		return sock;
 	}
 
+	/**
+	 * Disconnect.
+	 */
 	public void disconnect() {
 		if(this.socket != null) {
 			try {
@@ -71,6 +106,12 @@ public class Client {
 		}
 	}
 
+	/**
+	 * Send.
+	 *
+	 * @param message the message
+	 * @return true, if successful
+	 */
 	public boolean send(ClientMessage message) {
 		try {
 			writer.reset();
@@ -82,6 +123,12 @@ public class Client {
 		}
 	}
 
+	/**
+	 * Read.
+	 *
+	 * @return the server message
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public ServerMessage read() throws IOException {
 		try {
 			return (ServerMessage) reader.readObject();
@@ -91,10 +138,20 @@ public class Client {
 		}
 	}
 
+	/**
+	 * Sets the action messages.
+	 *
+	 * @param action the new action messages
+	 */
 	public void setActionMessages(ActionsMessages action) {
 		this.actionsMessages = action;
 	}
 
+	/**
+	 * Gets the actions messages.
+	 *
+	 * @return the actions messages
+	 */
 	public ActionsMessages getActionsMessages() {
 		return this.actionsMessages;
 	}

@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package chat.client.ui;
 
 import java.awt.BorderLayout;
@@ -14,15 +17,30 @@ import chat.messages.ClientMessageMessage;
 import chat.messages.DataMessage;
 import chat.messages.DataUser;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MainWindow.
+ */
 public class MainWindow extends JFrame {
 
+	/** The client. */
 	private Client client;
 
+	/** The panel config. */
 	private ConfigurationPanel panelConfig;
+	
+	/** The panel connected. */
 	private ConnectedPanel     panelConnected;
+	
+	/** The panel discussion. */
 	private DiscussionPanel    panelDiscussion;
+	
+	/** The panel logout. */
 	private LogoutPanel        panelLogout;
 
+	/**
+	 * Instantiates a new main window.
+	 */
 	public MainWindow() {
 		super();
 
@@ -44,6 +62,14 @@ public class MainWindow extends JFrame {
 		this.setVisible(true);
 	}
 
+	/**
+	 * Sets the client.
+	 *
+	 * @param ip the ip
+	 * @param port the port
+	 * @param username the username
+	 * @return the string
+	 */
 	public String setClient(String ip, int port, String username) {
 		try {
 			this.client = new Client(ip, port, username);
@@ -86,6 +112,9 @@ public class MainWindow extends JFrame {
 		return "OK";
 	}
 
+	/**
+	 * Reset client.
+	 */
 	public void resetClient() {
 		if(this.client != null) {
 			this.client.disconnect();
@@ -98,6 +127,12 @@ public class MainWindow extends JFrame {
 		this.setVisible(true);
 	}
 
+	/**
+	 * Send message.
+	 *
+	 * @param message the message
+	 * @return true, if successful
+	 */
 	public boolean sendMessage(String message) {
 		if(this.client != null) {
 			ClientMessageMessage toSend = new ClientMessageMessage(message);
@@ -107,6 +142,11 @@ public class MainWindow extends JFrame {
 		return false;
 	}
 
+	/**
+	 * Gets the panel connected.
+	 *
+	 * @return the panel connected
+	 */
 	public ConnectedPanel getPanelConnected() {
 		return this.panelConnected;
 	}

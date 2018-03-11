@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package chat.client.ui;
 
 import java.awt.GridLayout;
@@ -6,12 +9,23 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class LogoutPanel.
+ */
 public class LogoutPanel extends JPanel {
 
+	/** The btn logout. */
 	private Button btnLogout;
 
+	/** The window. */
 	private MainWindow window;
 
+	/**
+	 * Instantiates a new logout panel.
+	 *
+	 * @param window the window
+	 */
 	public LogoutPanel(final MainWindow window) {
 		this.window = window;
 

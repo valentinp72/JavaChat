@@ -7,8 +7,15 @@ import javax.swing.JList;
 
 import chat.messages.DataUser;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ListCellRenderer.
+ */
 public class ListCellRenderer extends DefaultListCellRenderer {
 
+	/* (non-Javadoc)
+	 * @see javax.swing.DefaultListCellRenderer#getListCellRendererComponent(javax.swing.JList, java.lang.Object, int, boolean, boolean)
+	 */
 	@Override
 	public Component getListCellRendererComponent(
 		JList list,

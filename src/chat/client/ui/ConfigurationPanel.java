@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package chat.client.ui;
 
 import java.awt.GridBagConstraints;
@@ -10,18 +13,38 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ConfigurationPanel.
+ */
 public class ConfigurationPanel extends JPanel {
 
+	/** The username. */
 	private Field  username;
+	
+	/** The ip. */
 	private Field  ip;
+	
+	/** The port. */
 	private Field  port;
+	
+	/** The btn login. */
 	private Button btnLogin;
 
+	/** The layout. */
 	private GridBagLayout      layout;
+	
+	/** The gbc. */
 	private GridBagConstraints gbc;
 
+	/** The window. */
 	private MainWindow window;
 
+	/**
+	 * Instantiates a new configuration panel.
+	 *
+	 * @param window the window
+	 */
 	public ConfigurationPanel(final MainWindow window) {
 		this.window = window;
 
@@ -92,6 +115,9 @@ public class ConfigurationPanel extends JPanel {
 		this.add(this.port,     gbc);
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.swing.JComponent#addNotify()
+	 */
 	@Override
 	public void addNotify() {
 		super.addNotify();
