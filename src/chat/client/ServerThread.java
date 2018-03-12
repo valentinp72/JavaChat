@@ -66,34 +66,18 @@ public class ServerThread implements Runnable {
 					if(actions != null) {
 						ServerMessage message = client.read();
 
-						System.out.println(message.toString());
-
-						if(message instanceof ServerMessageMessages) {
-							ServerMessageMessages msg = (ServerMessageMessages) message;
-							actions.setMessages(msg.getMessages());
-						}
-						else if(message instanceof ServerMessageNewMessage) {
-							ServerMessageNewMessage msg = (ServerMessageNewMessage) message;
-							actions.newMessage(msg.getMessage());
-						}
-						else if(message instanceof ServerMessageUsers) {
-							ServerMessageUsers msg = (ServerMessageUsers) message;
-							actions.setUsers(msg.getUsers());
-						}
-						else if(message instanceof ServerMessageConnectionError) {
-							ServerMessageConnectionError msg = (ServerMessageConnectionError) message;
-							actions.connectionError(msg.getExplanation());
-						}
-
+						// we do the action
+						message.action(actions);
 					}
+					else {
+						// we wait a little bit more
+						try {
+							Thread.sleep(100);
 
-					// we wait a little bit more
-					try {
-						Thread.sleep(100);
-
-					}
-					catch(InterruptedException e) {
-						// pas grave
+						}
+						catch(InterruptedException e) {
+							// pas grave
+						}
 					}
 
 

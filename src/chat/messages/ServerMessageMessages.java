@@ -2,6 +2,8 @@ package chat.messages;
 
 import java.util.List;
 
+import chat.client.ActionsMessages;
+
 /**
  * This class represents a message the server send to tell the clients all the messages of the chat.
  */
@@ -34,6 +36,15 @@ public class ServerMessageMessages extends ServerMessage {
 	 */
 	public String toString() {
 		return toString(messages);
+	}
+
+	/**
+	 * Do the action when there this message
+	 *
+	 * @param actions the ActionsMessages object
+	 */
+	public void action(ActionsMessages actions) {
+		actions.setMessages(this.messages);
 	}
 
 }

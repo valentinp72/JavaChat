@@ -1,5 +1,7 @@
 package chat.messages;
 
+import chat.client.ActionsMessages;
+
 /**
  * This message is sent by the server when there is a connection error.
  */
@@ -33,6 +35,15 @@ public class ServerMessageConnectionError extends ServerMessage {
 	 */
 	public String toString() {
 		return toString(explanation);
+	}
+
+	/**
+	 * Do the action when there this message
+	 *
+	 * @param actions the ActionsMessages object
+	 */
+	public void action(ActionsMessages actions) {
+		actions.connectionError(this.explanation);
 	}
 
 }

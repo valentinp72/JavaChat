@@ -1,5 +1,7 @@
 package chat.messages;
 
+import chat.client.ActionsMessages;
+
 /**
  * This class represents a message the server send to the
  * clients when there is a new message on the chat.
@@ -33,6 +35,15 @@ public class ServerMessageNewMessage extends ServerMessage {
 	 */
 	public String toString() {
 		return toString(message);
+	}
+
+	/**
+	 * Do the action when there this message
+	 *
+	 * @param actions the ActionsMessages object
+	 */
+	public void action(ActionsMessages actions) {
+		actions.newMessage(this.message);
 	}
 
 }

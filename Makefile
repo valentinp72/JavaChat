@@ -9,8 +9,9 @@ build: all
 client:
 	java -classpath bin/ chat.client.Application
 
+server: serveur
+
 serveur:
-	echo "a"
 	java -classpath bin/ chat.server.Application
 
 clean:
