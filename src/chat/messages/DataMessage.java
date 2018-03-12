@@ -31,7 +31,7 @@ public class DataMessage implements Serializable {
 	 */
 	public DataMessage(DataUser user, String message) {
 		this.user     = user;
-		this.message  = message;
+		this.message  = message.replaceAll("(?m)^\\s", "");
 		this.time     = new Date();
 		this.dformat  = new SimpleDateFormat("HH:mm");
 	}
