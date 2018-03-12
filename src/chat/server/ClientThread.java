@@ -112,8 +112,10 @@ public class ClientThread implements Runnable {
 				if(message instanceof ClientMessageMessage) {
 					ClientMessageMessage msg = (ClientMessageMessage) message;
 
-					// the client sent a new message
-					this.server.addMessage(new DataMessage(user, msg.getMessage()));
+					if(msg.getMessage().length() > 0) {
+						// the client sent a new message
+						this.server.addMessage(new DataMessage(user, msg.getMessage()));
+					}
 				}
 
 				if(message instanceof ClientMessageLogout) {
