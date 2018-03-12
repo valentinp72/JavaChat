@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.net.SocketException;
 
 import chat.messages.ClientMessage;
 import chat.messages.ClientMessageLogin;
@@ -45,6 +46,9 @@ public class ClientThread implements Runnable {
 	/** The input from the client */
 	private ObjectInputStream  input;
 
+	/** True if the thread is running */
+	private boolean running;
+
 	/**
 	 * Instantiates a new client thread.
 	 *
@@ -63,8 +67,9 @@ public class ClientThread implements Runnable {
 			e.printStackTrace();
 		}
 
-		this.thread = new Thread(this);
+		this.thread  = new Thread(this);
 		this.thread.start();
+		this.running = true;
 	}
 
 	/**
@@ -76,57 +81,21 @@ public class ClientThread implements Runnable {
 			// hello message
 			ClientMessageLogin loginMsg = (ClientMessageLogin) this.read();
 
-			// check the username is not already taken
-			if(this.server.getUsernames().contains(loginMsg.getUsername()) || loginMsg.getUsername() == ADMIN_USER.getUsername()) {
-				this.send(new ServerMessageConnectionError("Pseudo déjà prit !"));
-				this.server.removeClient(this);
-				return;
-			}
-
-			// check the username is not null
-			if(loginMsg.getUsername().trim().length() == 0) {
-				this.send(new ServerMessageConnectionError("Pseudo invalide !"));
-				this.server.removeClient(this);
-				return;
-			}
-
-			// check the username length
-			if(loginMsg.getUsername().length() > 20) {
-				this.send(new ServerMessageConnectionError("Pseudo trop long !"));
-				this.server.removeClient(this);
-				return;
-			}
-
-			// that seemed okay
+			loginMsg.action(this);
+			System.out.println(loginMsg.toString());
 
 			this.user = new DataUser(loginMsg.getUsername()); // we create the real user
 			this.server.sendUserList();     // we send the updated user list to the clients
 			this.send(new ServerMessageMessages(server.getMessages())); // we send the messages to the client
 			this.sendWelcomeMessage();      // we send the welcome message
 
-			while(true) {
+			while(running) {
 
 				// we wait until we receive a message from the client
 				ClientMessage message = this.read();
 
-				if(message instanceof ClientMessageMessage) {
-					ClientMessageMessage msg = (ClientMessageMessage) message;
+				message.action(this);
 
-					if(msg.getMessage().length() > 0) {
-						// the client sent a new message
-						this.server.addMessage(new DataMessage(user, msg.getMessage()));
-					}
-				}
-
-				if(message instanceof ClientMessageLogout) {
-					ClientMessageLogout msg = (ClientMessageLogout) message;
-
-					// the client wants to log out
-					this.server.removeClient(this);
-					this.server.sendUserList();
-					this.sendGoodbyeMessage();
-					return;
-				}
 				System.out.println(message.toString());
 			}
 		}
@@ -135,6 +104,18 @@ public class ClientThread implements Runnable {
 			this.server.removeClient(this);
 			this.server.sendUserList();
 			this.sendGoodbyeMessage();
+			thread.currentThread().interrupt();
+		}
+
+	}
+
+	/**
+	 * Stop to listen messages.
+	 */
+	public void stop() {
+		if(this.running) {
+			this.running = false;
+			this.thread.interrupt();
 		}
 	}
 
@@ -191,6 +172,39 @@ public class ClientThread implements Runnable {
 	public void sendGoodbyeMessage() {
 		DataMessage msg = new DataMessageInfo(ADMIN_USER, user.toString() + " vient de quitter.");
 		this.server.addMessage(msg);
+	}
+
+	public void sendNewMessage(DataMessage message) {
+		this.server.addMessage(message);
+	}
+
+	public void actionLogin(String username) {
+
+		// check the username is not already taken
+		if(this.server.getUsernames().contains(username) || username == ADMIN_USER.getUsername()) {
+			this.send(new ServerMessageConnectionError("Pseudo déjà prit !"));
+			this.server.removeClient(this);
+		}
+
+		// check the username is not null
+		if(username.trim().length() == 0) {
+			this.send(new ServerMessageConnectionError("Pseudo invalide !"));
+			this.server.removeClient(this);
+		}
+
+		// check the username length
+		if(username.length() > 20) {
+			this.send(new ServerMessageConnectionError("Pseudo trop long !"));
+			this.server.removeClient(this);
+		}
+
+	}
+
+	public void actionLogout() {
+		// the client wants to log out
+		this.server.removeClient(this);
+		this.server.sendUserList();
+		this.sendGoodbyeMessage();
 	}
 
 }

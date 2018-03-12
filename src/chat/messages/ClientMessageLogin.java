@@ -1,5 +1,7 @@
 package chat.messages;
 
+import chat.server.ClientThread;
+
 /**
  * This class represents a hello from the client to the server.
  */
@@ -32,6 +34,10 @@ public class ClientMessageLogin extends ClientMessage {
 	 */
 	public String toString() {
 		return toString(username);
+	}
+
+	public void action(ClientThread clientThread) {
+		clientThread.actionLogin(this.username);
 	}
 
 }

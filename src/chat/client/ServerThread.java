@@ -25,7 +25,7 @@ public class ServerThread implements Runnable {
 	/** The thread */
 	private Thread thread;
 
-	/** The running */
+	/** True if the thread is running */
 	private boolean running;
 
 	/**
@@ -37,10 +37,10 @@ public class ServerThread implements Runnable {
 	public ServerThread(Socket socket, Client client) {
 		this.socket  = socket;
 		this.client  = client;
-		this.running = true;
 
 		this.thread  = new Thread(this);
 		this.thread.start();
+		this.running = true;
 	}
 
 	/**

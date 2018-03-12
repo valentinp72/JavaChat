@@ -1,5 +1,7 @@
 package chat.messages;
 
+import chat.server.ClientThread;
+
 /**
  * This class represents a message the client send to the server to send a new message.
  */
@@ -32,6 +34,13 @@ public class ClientMessageMessage extends ClientMessage {
 	 */
 	public String toString() {
 		return toString(message);
+	}
+
+	public void action(ClientThread clientThread) {
+		if(message.length() > 0) {
+			// the client sent a new message
+			clientThread.sendNewMessage(new DataMessage(clientThread.getUser(), this.message));
+		}
 	}
 
 }

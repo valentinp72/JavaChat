@@ -73,6 +73,7 @@ public class Server {
 	 */
 	public void removeClient(ClientThread client) {
 		clients.remove(client);
+		client.stop();
 	}
 
 	/**
