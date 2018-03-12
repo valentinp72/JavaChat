@@ -87,6 +87,9 @@ public class MessagesTableModel extends AbstractTableModel {
 		if(column == 0) {
 			return this.messages.get(row).getUser().getColor();
 		}
+		else if(column == 1) {
+			return this.messages.get(row).getColor();
+		}
 		return Color.BLACK;
 	}
 

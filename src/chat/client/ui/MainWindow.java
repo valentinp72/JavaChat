@@ -157,4 +157,13 @@ public class MainWindow extends JFrame {
 		return this.panelConnected;
 	}
 
+	/**
+	 * Gets the client
+	 *
+	 * @return the client
+	 */
+	public Client getClient() {
+		return this.client;
+	}
+
 }

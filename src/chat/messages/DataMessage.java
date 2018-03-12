@@ -1,5 +1,6 @@
 package chat.messages;
 
+import java.awt.Color;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -59,6 +60,15 @@ public class DataMessage implements Serializable {
 	 */
 	public String getMessage() {
 		return this.message;
+	}
+
+	/**
+	 * Gets the message color
+	 *
+	 * @return the color to be displayed
+	 */
+	public Color getColor() {
+		return Color.BLACK;
 	}
 
 	/**

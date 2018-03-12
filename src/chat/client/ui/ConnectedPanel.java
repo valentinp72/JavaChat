@@ -22,6 +22,9 @@ public class ConnectedPanel extends JPanel {
 	/** The list of connected users */
 	private JList<DataUser> list;
 
+	/** The main window */
+	private MainWindow window;
+
 	/**
 	 * Instantiates a new connected panel.
 	 *
@@ -29,9 +32,11 @@ public class ConnectedPanel extends JPanel {
 	 */
 	public ConnectedPanel(MainWindow window) {
 		super();
+		this.window = window;
+
 		this.setLayout(new BorderLayout());
 		this.list   = new JList<DataUser>();
-		this.list.setCellRenderer(new ListCellRenderer());
+		this.list.setCellRenderer(new ListCellRenderer(window));
 		this.scroll = new JScrollPane(this.list);
 
 		this.scroll.setBorder(BorderFactory.createTitledBorder("Connectés"));

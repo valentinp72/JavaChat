@@ -10,6 +10,7 @@ import chat.messages.ClientMessageLogin;
 import chat.messages.ClientMessageLogout;
 import chat.messages.ClientMessageMessage;
 import chat.messages.DataMessage;
+import chat.messages.DataMessageInfo;
 import chat.messages.DataUser;
 import chat.messages.ServerMessage;
 import chat.messages.ServerMessageMessages;
@@ -178,7 +179,7 @@ public class ClientThread implements Runnable {
 	 * Send welcome message to all.
 	 */
 	public void sendWelcomeMessage() {
-		DataMessage msg = new DataMessage(ADMIN_USER, user.toString() + " vient de rejoindre.");
+		DataMessage msg = new DataMessageInfo(ADMIN_USER, user.toString() + " vient de rejoindre.");
 		this.server.addMessage(msg);
 	}
 
@@ -186,7 +187,7 @@ public class ClientThread implements Runnable {
 	 * Send goodbye message to all.
 	 */
 	public void sendGoodbyeMessage() {
-		DataMessage msg = new DataMessage(ADMIN_USER, user.toString() + " vient de quitter.");
+		DataMessage msg = new DataMessageInfo(ADMIN_USER, user.toString() + " vient de quitter.");
 		this.server.addMessage(msg);
 	}
 

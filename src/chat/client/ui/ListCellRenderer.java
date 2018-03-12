@@ -13,6 +13,13 @@ import chat.messages.DataUser;
  */
 public class ListCellRenderer extends DefaultListCellRenderer {
 
+	private MainWindow window;
+
+	public ListCellRenderer(MainWindow window) {
+		super();
+		this.window = window;
+	}
+
 	/* (non-Javadoc)
 	 * @see javax.swing.DefaultListCellRenderer#getListCellRendererComponent(javax.swing.JList, java.lang.Object, int, boolean, boolean)
 	 */
@@ -29,7 +36,13 @@ public class ListCellRenderer extends DefaultListCellRenderer {
 
 		if(value instanceof DataUser) {
 			DataUser user = (DataUser) value;
+
+			if(window.getClient() != null && user.getUsername().equals(window.getClient().getClientName())) {
+				c.setBackground(user.getBackgroundColor());
+			}
+
 			c.setForeground(user.getColor());
+
 		}
 
 		return c;

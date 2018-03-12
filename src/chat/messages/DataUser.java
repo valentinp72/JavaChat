@@ -65,4 +65,8 @@ public class DataUser implements Serializable {
 		return this.color;
 	}
 
+	public Color getBackgroundColor() {
+		return Color.LIGHT_GRAY;
+	}
+
 }

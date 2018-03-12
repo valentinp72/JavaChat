@@ -158,4 +158,8 @@ public class Client {
 		return this.actionsMessages;
 	}
 
+	public String getClientName() {
+		return this.clientName;
+	}
+
 }

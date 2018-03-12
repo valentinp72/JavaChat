@@ -1,10 +1,14 @@
 package chat.client.ui;
 
+import java.awt.Color;
 import java.awt.Component;
 
+import javax.swing.BorderFactory;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.table.TableCellRenderer;
+
+import chat.messages.DataMessage;
 
 /**
  * This class wraps the content of a JTextArea in a table if the
@@ -47,6 +51,10 @@ public class WrapTableCellRenderer extends JTextArea implements TableCellRendere
 
 		if(table.getRowHeight(row) != getPreferredSize().height)
 			table.setRowHeight(row, getPreferredSize().height);
+
+		MessagesTableModel tableModel = (MessagesTableModel) table.getModel();
+		this.setForeground(tableModel.getColorAt(row, column));
+
 
 		return this;
 	}

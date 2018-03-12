@@ -5,6 +5,7 @@ import java.awt.Component;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.SwingConstants;
 
 /**
  * The class ColorTableCellRenderer, allowing to update the foreground color a
@@ -29,6 +30,9 @@ public class ColorTableCellRenderer extends DefaultTableCellRenderer {
 		MessagesTableModel tableModel = (MessagesTableModel) table.getModel();
 
 		l.setForeground(tableModel.getColorAt(row, column));
+
+		this.setHorizontalAlignment(SwingConstants.CENTER);
+		this.setVerticalAlignment(SwingConstants.TOP);
 
 		return this;
 	}
