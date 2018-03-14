@@ -19,6 +19,8 @@ import chat.server.command.Command;
 import chat.server.command.CommandInfo;
 import chat.server.command.CommandHelp;
 import chat.server.command.CommandMsg;
+import chat.server.command.CommandColor;
+
 
 
 /**
@@ -32,8 +34,15 @@ public class Server {
 
 	public static final DataUser INFO_USER  = new DataUser("INFO");
 
-	private static final String DEFAULT_MESSAGE_CONT = "Bonjour et bienvenue sur le serveur de chat !\n"
-	                                                 + "JavaChat™ est un serveur de chat qui permet de chatter !";
+	private static final String DEFAULT_MESSAGE_CONT = "Bonjour et bienvenue sur JavaChat™ !\n"
+	                                                 + "Vous pouvez :\n"
+													 + "  - envoyer un message depuis la zone 'Message'\n"
+													 + "  - effectuer une commande en débutant un message par un '/'\n"
+													 + "  - afficher les commandes disponnibles avec '/help'\n"
+													 + "  - envoyer un message privé avec '/msg destinataire message'\n"
+													 + "  - changer la couleur de votre pseudo avec '/color #rrggbb'\n"
+													 + "\n"
+													 + " Bon chat ! :)";
 	private static final DataMessage DEFAULT_MESSAGE = new DataMessage(INFO_USER, DEFAULT_MESSAGE_CONT);
 
 	/** The port of the server */
@@ -138,10 +147,12 @@ public class Server {
 	 * @param message the message
 	 */
 	public void addMessage(DataMessage message) {
-		if(!interpretCommand(message)) {
-			this.messages.add(message);
-			ServerMessageNewMessage msg = new ServerMessageNewMessage(message);
-			this.sendServerMsgToClients(msg);
+		if(message.getMessage().length() != 0) {
+			if(!interpretCommand(message)) {
+				this.messages.add(message);
+				ServerMessageNewMessage msg = new ServerMessageNewMessage(message);
+				this.sendServerMsgToClients(msg);
+			}
 		}
 	}
 
@@ -169,6 +180,9 @@ public class Server {
 					break;
 				case "help":
 					c = new CommandHelp();
+					break;
+				case "color":
+					c = new CommandColor();
 					break;
 
 				// not a valid command

@@ -31,7 +31,7 @@ public class CommandHelp extends Command {
 
 	public String content() {
 
-		String[] commandes = {"help", "msg", "info"};
+		String[] commandes = {"help", "msg", "info", "color"};
 
 		String s = " = AIDE: = \n\n";
 
@@ -47,10 +47,12 @@ public class CommandHelp extends Command {
 		switch(command) {
 			case "help":
 				return "affiche ce menu d'aide";
-			case "msg" :
+			case "msg":
 				return "envoi d'un message privé à un utilisateur";
-			case "info" :
+			case "info":
 				return "envoi d'un message d'information à tout le monde";
+			case "color":
+				return "changement de la couleur du pseudo";
 
 			default:
 				return "aide non trouvée !";

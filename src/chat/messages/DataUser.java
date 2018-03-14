@@ -26,17 +26,7 @@ public class DataUser implements Serializable {
 
 		// color of user is "unique" for each username
 		int hash = username.hashCode();
-		int r = (hash & 0xFF0000) >> 16;
-		int g = (hash & 0x00FF00) >> 8;
-		int b = (hash & 0x0000FF);
-
-		this.color = new Color(r, g, b);
-
-		// we make sure the color is dark enough to be printed on white
-		double luminance = 0.2126 * r + 0.7152 * g + 0.0722 * b;
-		if(luminance > 200) {
-			this.color = color.darker().darker();
-		}
+		this.setColor(hash);
 	}
 
 	/**
@@ -63,6 +53,27 @@ public class DataUser implements Serializable {
 	 */
 	public Color getColor() {
 		return this.color;
+	}
+
+	public void setColor(Color c) {
+		this.color = c;
+	}
+
+	public void setColor(int c) {
+		int r = (c & 0xFF0000) >> 16;
+		int g = (c & 0x00FF00) >> 8;
+		int b = (c & 0x0000FF);
+		this.color = new Color(r, g, b);
+
+		// we make sure the color is dark enough to be printed on white
+		double luminance = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+		if(luminance > 200) {
+			this.color = color.darker().darker();
+		}
+	}
+
+	public void setColor(String hexColor) {
+		this.setColor(Integer.decode(hexColor));
 	}
 
 	public Color getBackgroundColor() {
