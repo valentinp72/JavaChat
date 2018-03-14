@@ -40,7 +40,7 @@ public class Client {
 	private ServerThread thread;
 
 	/** The actions to do when messages are comming */
-	private ActionsMessages actionsMessages;
+	private volatile ActionsMessages actionsMessages;
 
 	/**
 	 * Instantiates a new client.

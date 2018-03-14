@@ -25,9 +25,6 @@ import chat.messages.ServerMessageConnectionError;
 
 public class ClientThread implements Runnable {
 
-	/** The user the welcome and goodbye messages are sent by */
-	private static final DataUser ADMIN_USER = new DataUser("");
-
 	/** The user the thread is communicating with */
 	private DataUser user;
 
@@ -162,7 +159,7 @@ public class ClientThread implements Runnable {
 	 * Send welcome message to all.
 	 */
 	public void sendWelcomeMessage() {
-		DataMessage msg = new DataMessageInfo(ADMIN_USER, user.toString() + " vient de rejoindre.");
+		DataMessage msg = new DataMessageInfo(server.ADMIN_USER, user.toString() + " vient de rejoindre.");
 		this.server.addMessage(msg);
 	}
 
@@ -170,7 +167,7 @@ public class ClientThread implements Runnable {
 	 * Send goodbye message to all.
 	 */
 	public void sendGoodbyeMessage() {
-		DataMessage msg = new DataMessageInfo(ADMIN_USER, user.toString() + " vient de quitter.");
+		DataMessage msg = new DataMessageInfo(server.ADMIN_USER, user.toString() + " vient de quitter.");
 		this.server.addMessage(msg);
 	}
 
@@ -181,7 +178,7 @@ public class ClientThread implements Runnable {
 	public void actionLogin(String username) {
 
 		// check the username is not already taken
-		if(this.server.getUsernames().contains(username) || username == ADMIN_USER.getUsername()) {
+		if(this.server.getUsernames().contains(username) || username == server.ADMIN_USER.getUsername()) {
 			this.send(new ServerMessageConnectionError("Pseudo déjà prit !"));
 			this.server.removeClient(this);
 		}
