@@ -83,11 +83,15 @@ public class MainWindow extends JFrame {
 			this.client.setActionMessages(new ActionsMessages() {
 				// action when a new message occurs
 				public void newMessage(DataMessage message) {
+					message.replaceEmojis();
 					panelDiscussion.addMessage(message);
 				}
 
 				// action when the server wants to reset all the messages
 				public void setMessages(List<DataMessage> messages) {
+					for(DataMessage m : messages) {
+						m.replaceEmojis();
+					}
 					panelDiscussion.setMessages(messages);
 				}
 

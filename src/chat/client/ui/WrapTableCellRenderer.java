@@ -1,5 +1,10 @@
 package chat.client.ui;
 
+import java.io.File;
+import java.io.IOException;
+
+import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.Color;
 import java.awt.Component;
 
@@ -16,6 +21,21 @@ import chat.messages.DataMessage;
  */
 
 public class WrapTableCellRenderer extends JTextArea implements TableCellRenderer {
+
+	public static Font FONT;
+
+	static {
+		try {
+			FONT = Font.createFont(Font.TRUETYPE_FONT, new File("src/chat/client/ui/OpenSansEmoji.ttf")).deriveFont(13f);
+			//FONT = new Font("Arial Unicode", Font.PLAIN, 12);
+		}
+		catch(FontFormatException e) {
+			System.out.println("no font");
+		}
+		catch(IOException e) {
+			System.out.println("io");
+		}
+	}
 
 	/**
 	 * Instantiates a new wrap table cell renderer.
@@ -47,6 +67,9 @@ public class WrapTableCellRenderer extends JTextArea implements TableCellRendere
 		int height = getPreferredSize().height;
 
 		this.setText(value.toString());
+
+		if(FONT != null)
+			this.setFont(FONT);
 		this.setSize(width, getPreferredSize().height);
 
 		if(table.getRowHeight(row) != getPreferredSize().height)

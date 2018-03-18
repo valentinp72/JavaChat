@@ -20,6 +20,7 @@ import chat.server.command.CommandInfo;
 import chat.server.command.CommandHelp;
 import chat.server.command.CommandMsg;
 import chat.server.command.CommandColor;
+import chat.server.command.CommandEmojis;
 
 
 
@@ -34,13 +35,14 @@ public class Server {
 
 	public static final DataUser INFO_USER  = new DataUser("INFO");
 
-	private static final String DEFAULT_MESSAGE_CONT = "Bonjour et bienvenue sur JavaChat™ !\n"
+	private static final String DEFAULT_MESSAGE_CONT = "Bonjour et bienvenue sur JavaChat™ ! :p\n"
 	                                                 + "Vous pouvez :\n"
 													 + "  - envoyer un message depuis la zone 'Message'\n"
 													 + "  - effectuer une commande en débutant un message par un '/'\n"
 													 + "  - afficher les commandes disponnibles avec '/help'\n"
 													 + "  - envoyer un message privé avec '/msg destinataire message'\n"
 													 + "  - changer la couleur de votre pseudo avec '/color #rrggbb'\n"
+													 + "  - afficher la liste des emojis avec '/emojis'\n"
 													 + "\n"
 													 + " Bon chat ! :)";
 	private static final DataMessage DEFAULT_MESSAGE = new DataMessage(INFO_USER, DEFAULT_MESSAGE_CONT);
@@ -183,6 +185,9 @@ public class Server {
 					break;
 				case "color":
 					c = new CommandColor();
+					break;
+				case "emojis":
+					c = new CommandEmojis();
 					break;
 
 				// not a valid command

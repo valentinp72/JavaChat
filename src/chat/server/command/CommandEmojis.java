@@ -1,5 +1,6 @@
 package chat.server.command;
 
+import java.util.Map;
 import java.util.List;
 
 import chat.server.Server;
@@ -9,7 +10,7 @@ import chat.messages.DataMessageInfo;
 import chat.messages.DataMessage;
 import chat.messages.ServerMessage;
 
-public class CommandHelp extends Command {
+public class CommandEmojis extends Command {
 
 	public String execute(Server server, DataMessage original) {
 
@@ -31,38 +32,19 @@ public class CommandHelp extends Command {
 
 	public String content() {
 
-		String[] commandes = {"help", "msg", "info", "color", "emojis"};
+		String s = " = EMOJIS: = \n";
 
-		String s = " = AIDE: = \n\n";
+		s += " Pour entrer un emoji, il vous suffit d'entrer dans votre message les raccourcis correspondants aux smileys. Pour ne pas être interprétés comme des smileys, vous devez les précéder d'un point d'exclamation (!).\n\n";
 
-		s += " - Commandes:\n";
-		for(String cmd : commandes) {
-			s +=   "    > /" + cmd + " : " + infoCommand(cmd) + "\n";
+		for(Map.Entry<String, String> pair : DataMessage.getEmojis().entrySet()) {
+			s += " - " + pair.getValue() + " => !" + pair.getKey() + "\n";
 		}
 
 		return s;
 	}
 
-	public String infoCommand(String command) {
-		switch(command) {
-			case "help":
-				return "affiche ce menu d'aide";
-			case "msg":
-				return "envoi d'un message privé à un utilisateur";
-			case "info":
-				return "envoi d'un message d'information à tout le monde";
-			case "color":
-				return "changement de la couleur du pseudo";
-			case "emojis":
-				return "affichage de la liste des emojis";
-
-			default:
-				return "aide non trouvée !";
-		}
-	}
-
 	public String usage() {
-		return super.usage() + "help";
+		return super.usage() + "emojis";
 	}
 
 }
