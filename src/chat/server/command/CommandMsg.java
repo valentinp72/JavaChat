@@ -1,6 +1,7 @@
 package chat.server.command;
 
 import java.util.List;
+import java.io.IOException;
 
 import chat.server.Server;
 import chat.server.ClientThread;
@@ -40,8 +41,14 @@ public class CommandMsg extends Command {
 
 		//ServerMessage msgC   = new ServerMessageNewMessage(messageC);
 		ServerMessage msgS   = new ServerMessageNewMessage(messageS);
-		client.send(msgS);
-		sender.send(msgS);
+		try {
+			sender.send(msgS);
+			client.send(msgS);
+		}
+		catch(IOException e) {
+			e.printStackTrace();
+		}
+
 
 		return PAS_ERREUR;
 	}

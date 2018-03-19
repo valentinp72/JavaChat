@@ -1,6 +1,7 @@
 package chat.server.command;
 
 import java.util.List;
+import java.io.IOException;
 
 import chat.server.Server;
 import chat.server.ClientThread;
@@ -24,8 +25,12 @@ public class CommandHelp extends Command {
 		// we send him the message, and also to the sender
 		DataMessage message = new DataMessageInfo(original.getUser(), this.content());
 		ServerMessage msg   = new ServerMessageNewMessage(message);
-		sender.send(msg);
-
+		try {
+			sender.send(msg);
+		}
+		catch(IOException e) {
+			e.printStackTrace();
+		}
 		return PAS_ERREUR;
 	}
 

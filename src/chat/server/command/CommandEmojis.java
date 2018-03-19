@@ -1,5 +1,6 @@
 package chat.server.command;
 
+import java.io.IOException;
 import java.util.Map;
 import java.util.List;
 
@@ -25,7 +26,12 @@ public class CommandEmojis extends Command {
 		// we send him the message, and also to the sender
 		DataMessage message = new DataMessageInfo(original.getUser(), this.content());
 		ServerMessage msg   = new ServerMessageNewMessage(message);
-		sender.send(msg);
+		try {
+			sender.send(msg);
+		}
+		catch(IOException e) {
+			e.printStackTrace();
+		}
 
 		return PAS_ERREUR;
 	}

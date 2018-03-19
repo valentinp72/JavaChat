@@ -59,14 +59,14 @@ public class ClientThread implements Runnable {
 		try {
 			this.output = new ObjectOutputStream(socket.getOutputStream());
 			this.input  = new ObjectInputStream(socket.getInputStream());
+
+			this.thread  = new Thread(this);
+			this.thread.start();
+			this.running = true;
 		}
 		catch(IOException e) {
-			e.printStackTrace();
+			this.server.removeClient(this);
 		}
-
-		this.thread  = new Thread(this);
-		this.thread.start();
-		this.running = true;
 	}
 
 	/**
@@ -121,14 +121,9 @@ public class ClientThread implements Runnable {
 	 *
 	 * @param msg the message to send
 	 */
-	public void send(ServerMessage msg) {
-		try {
-			output.reset();
-			output.writeObject(msg);
-		}
-		catch(IOException e) {
-			e.printStackTrace();
-		}
+	public void send(ServerMessage msg) throws IOException {
+		output.reset();
+		output.writeObject(msg);
 	}
 
 	/**
@@ -177,22 +172,27 @@ public class ClientThread implements Runnable {
 
 	public void actionLogin(String username) {
 
-		// check the username is not already taken
-		if(this.server.getUsernames().contains(username) || username == server.ADMIN_USER.getUsername()) {
-			this.send(new ServerMessageConnectionError("Pseudo déjà prit !"));
-			this.server.removeClient(this);
-		}
+		try {
+			// check the username is not already taken
+			if(this.server.usernameAlreadyTaken(username)) {
+					this.send(new ServerMessageConnectionError("Ce pseudo déjà prit, ou le serveur en a empêché l'utilisation !"));
+					this.server.removeClient(this);
+			}
 
-		// check the username is not null
-		if(username.trim().length() == 0) {
-			this.send(new ServerMessageConnectionError("Pseudo invalide !"));
-			this.server.removeClient(this);
-		}
+			// check the username is not null
+			if(username.trim().length() == 0) {
+				this.send(new ServerMessageConnectionError("Pseudo invalide !"));
+				this.server.removeClient(this);
+			}
 
-		// check the username length
-		if(username.length() > 20) {
-			this.send(new ServerMessageConnectionError("Pseudo trop long !"));
-			this.server.removeClient(this);
+			// check the username length
+			if(username.length() > 20) {
+				this.send(new ServerMessageConnectionError("Pseudo trop long !"));
+				this.server.removeClient(this);
+			}
+		}
+		catch(IOException e) {
+			actionLogout();
 		}
 
 	}

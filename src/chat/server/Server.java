@@ -1,5 +1,6 @@
 package chat.server;
 
+import java.io.IOException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -208,7 +209,12 @@ public class Server {
 	public void sendErrorMessage(String error, String username) {
 		ClientThread dest = getClientByName(username);
 		DataMessage   msg = new DataMessageInfo(ADMIN_USER, "Erreur " + error);
-		dest.send(new ServerMessageNewMessage(msg));
+		try {
+			dest.send(new ServerMessageNewMessage(msg));
+		}
+		catch(IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -226,7 +232,12 @@ public class Server {
 	 */
 	public void sendServerMsgToClients(ServerMessage msg) {
 		for(ClientThread client : clients) {
-			client.send(msg);
+			try {
+				client.send(msg);
+			}
+			catch(IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -237,6 +248,29 @@ public class Server {
 			}
 		}
 		throw new IllegalArgumentException(username + " n'est pas connecté au serveur");
+	}
+
+	/**
+	 * Check that the given username is already taken, it cannot connect to the server.
+	 *
+	 * @param username the username to check
+	 * @return true if the username is invalid, false otherwise
+	 */
+	public boolean usernameAlreadyTaken(String username) {
+		if(this.getUsernames().contains(username))
+			return true;
+
+		String[] forbiden = {
+			ADMIN_USER.getUsername().toLowerCase(),
+			INFO_USER.getUsername().toLowerCase(),
+			"admin",
+			"root"
+		};
+
+		if(Arrays.asList(forbiden).contains(username.toLowerCase()))
+			return true;
+
+		return false;
 	}
 
 	/**

@@ -68,7 +68,7 @@ public class ServerThread implements Runnable {
 
 						// we do the action
 						message.action(actions);
-					}
+					}/*
 					else {
 						// we wait a little bit more
 						try {
@@ -79,7 +79,7 @@ public class ServerThread implements Runnable {
 							// pas grave
 						}
 					}
-
+*/
 
 				}
 				catch(SocketException e) {
