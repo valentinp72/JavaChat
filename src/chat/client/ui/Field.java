@@ -1,10 +1,14 @@
 package chat.client.ui;
 
 import java.awt.Dimension;
+import java.util.function.Supplier;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.event.DocumentListener;
+import javax.swing.event.DocumentEvent;
+
 
 /**
  * The Field class is a class with a JTextField and a JLabel displaying information.
@@ -63,6 +67,15 @@ public class Field extends JPanel {
 	}
 
 	/**
+	 * Gets the real Java field
+	 *
+	 * @return the field
+	 */
+	public JTextField getField() {
+		return this.field;
+	}
+
+	/**
 	 * Gets the integer in the field
 	 *
 	 * @return the int
@@ -70,6 +83,25 @@ public class Field extends JPanel {
 	 */
 	public int getInt() throws NumberFormatException {
 		return Integer.parseInt(this.getText());
+	}
+
+	/**
+	 * Add an action to be executed when a change happen in the field
+	 *
+	 * @param sup the function to be executed
+	 */
+	public void addActionUpdate(Supplier sup) {
+		this.field.getDocument().addDocumentListener(new DocumentListener() {
+			public void changedUpdate(DocumentEvent e) {
+				sup.get();
+			}
+			public void removeUpdate(DocumentEvent e) {
+				sup.get();
+			}
+			public void insertUpdate(DocumentEvent e) {
+				sup.get();
+			}
+		});
 	}
 
 }

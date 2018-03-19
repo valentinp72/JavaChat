@@ -26,14 +26,14 @@ public class WrapTableCellRenderer extends JTextArea implements TableCellRendere
 
 	static {
 		try {
-			FONT = Font.createFont(Font.TRUETYPE_FONT, new File("src/chat/client/ui/OpenSansEmoji.ttf")).deriveFont(13f);
-			//FONT = new Font("Arial Unicode", Font.PLAIN, 12);
+			FONT = Font.createFont(Font.TRUETYPE_FONT, new File("resources/font/OpenSansEmoji.ttf")).deriveFont(14f);
+			// FONT = new Font("Arial Unicode", Font.PLAIN, 12);
 		}
 		catch(FontFormatException e) {
-			System.out.println("no font");
+			System.out.println("Invalid font! Emojis won't work");
 		}
 		catch(IOException e) {
-			System.out.println("io");
+			System.out.println("Font not found! Emojis won't work");
 		}
 	}
 

@@ -56,6 +56,11 @@ public class ConfigurationPanel extends JPanel {
 		this.port     = new Field("Port", "5890");
 		this.btnLogin = new Button("Connexion");
 
+		this.ip.addActionUpdate(() -> this.updateLoginState());
+		this.port.addActionUpdate(() -> this.updateLoginState());
+		this.username.addActionUpdate(() -> this.updateLoginState());
+
+
 		// add the action when the login button is clicked
 		this.btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
@@ -126,6 +131,28 @@ public class ConfigurationPanel extends JPanel {
 		gbc.gridx      = 1;
 		gbc.gridy      = 1;
 		this.add(this.port,     gbc);
+	}
+
+	/**
+	 * Updates the state of the login button according to the
+	 * states of the fields (disable and enable the button).
+	 *
+	 * @return true if the button is now active, false otherwise
+	 */
+	public boolean updateLoginState() {
+		if(this.username.getText().length() > 0 && this.ip.getText().length() > 0) {
+			try {
+				if(this.port.getInt() > 0 && this.port.getInt() <= 65535) {
+					this.btnLogin.setEnabled(true);
+					return true;
+				}
+			}
+			catch(NumberFormatException e) {
+				// only check if the port is valid
+			}
+		}
+		this.btnLogin.setEnabled(false);
+		return false;
 	}
 
 	/**
