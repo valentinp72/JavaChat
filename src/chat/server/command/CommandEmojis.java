@@ -11,8 +11,18 @@ import chat.messages.DataMessageInfo;
 import chat.messages.DataMessage;
 import chat.messages.ServerMessage;
 
+/**
+ * This class represents a command listing to the user all the available emojis and their shortcuts.
+ */
+
 public class CommandEmojis extends Command {
 
+	/**
+	 * Execute the command on the server.
+	 *
+	 * @param original the message containing the command
+	 * @return PAS_ERREUR
+	 */
 	public String execute(Server server, DataMessage original) {
 
 		ClientThread sender;
@@ -36,19 +46,29 @@ public class CommandEmojis extends Command {
 		return PAS_ERREUR;
 	}
 
+	/**
+	 * Returns the content of the help to display
+	 *
+	 * @return the content
+	 */
 	public String content() {
 
 		String s = " = EMOJIS: = \n";
 
-		s += " Pour entrer un emoji, il vous suffit d'entrer dans votre message les raccourcis correspondants aux smileys. Pour ne pas être interprétés comme des smileys, vous devez les précéder d'un point d'exclamation (!).\n\n";
+		s += " Pour entrer un emoji, il vous suffit d'entrer dans votre message les raccourcis correspondants aux smileys. Pour ne pas être interprétés comme des smileys, vous devez les précéder d'un autre deux point (par exemple :::joy: au lieu de ::joy: ).\n\n";
 
 		for(Map.Entry<String, String> pair : DataMessage.getEmojis().entrySet()) {
-			s += " - " + pair.getValue() + " => !" + pair.getKey() + "\n";
+			s += " - " + pair.getValue() + " => :" + pair.getKey() + "\n";
 		}
 
 		return s;
 	}
 
+	/**
+	 * Returns the usage of the current command.
+	 *
+	 * @return the usage of the command
+	 */
 	public String usage() {
 		return super.usage() + "emojis";
 	}

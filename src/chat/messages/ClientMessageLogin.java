@@ -36,8 +36,13 @@ public class ClientMessageLogin extends ClientMessage {
 		return toString(username);
 	}
 
-	public void action(ClientThread clientThread) {
-		clientThread.actionLogin(this.username);
+	/**
+	 * The action to be done when the server wants to execute the message
+	 *
+	 * @param clientThread the thread that received this message
+	 */
+	public boolean action(ClientThread clientThread) {
+		return clientThread.actionLogin(this.username);
 	}
 
 }

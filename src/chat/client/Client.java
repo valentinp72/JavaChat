@@ -158,6 +158,11 @@ public class Client {
 		return this.actionsMessages;
 	}
 
+	/**
+	 * Gets the client name.
+	 *
+	 * @return the client name
+	 */
 	public String getClientName() {
 		return this.clientName;
 	}

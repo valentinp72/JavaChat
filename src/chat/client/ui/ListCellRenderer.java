@@ -13,8 +13,16 @@ import chat.messages.DataUser;
  */
 public class ListCellRenderer extends DefaultListCellRenderer {
 
+	/**
+	 * The window the cell rendered is about
+	 */
 	private MainWindow window;
 
+	/**
+	 * Create a new renderer with a given window
+	 *
+	 * @param window the window
+	 */
 	public ListCellRenderer(MainWindow window) {
 		super();
 		this.window = window;

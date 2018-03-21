@@ -78,23 +78,24 @@ public class ClientThread implements Runnable {
 			// hello message
 			ClientMessageLogin loginMsg = (ClientMessageLogin) this.read();
 
-			loginMsg.action(this);
-			System.out.println(loginMsg.toString());
+			if(loginMsg.action(this)) {
 
-			this.user = new DataUser(loginMsg.getUsername()); // we create the real user
-			this.server.sendUserList();     // we send the updated user list to the clients
-			this.send(new ServerMessageMessages(server.getMessages())); // we send the messages to the client
-			this.sendWelcomeMessage();      // we send the welcome message
+				this.user = new DataUser(loginMsg.getUsername()); // we create the real user
+				this.server.sendUserList();     // we send the updated user list to the clients
+				this.send(new ServerMessageMessages(server.getMessages())); // we send the messages to the client
+				this.sendWelcomeMessage();      // we send the welcome message
 
-			while(running) {
+				while(running) {
 
-				// we wait until we receive a message from the client
-				ClientMessage message = this.read();
+					// we wait until we receive a message from the client
+					ClientMessage message = this.read();
 
-				message.action(this);
+					message.action(this);
 
-				System.out.println(message.toString());
+					System.out.println(message.toString());
+				}
 			}
+
 		}
 		catch(IOException e) {
 			// we remove the client
@@ -120,6 +121,7 @@ public class ClientThread implements Runnable {
 	 * Send a message to the client
 	 *
 	 * @param msg the message to send
+	 * @throws IOException if the message could not be sent
 	 */
 	public void send(ServerMessage msg) throws IOException {
 		output.reset();
@@ -166,42 +168,68 @@ public class ClientThread implements Runnable {
 		this.server.addMessage(msg);
 	}
 
-	public void sendNewMessage(DataMessage message) {
+	/**
+	 * Send a new message to all clients connected to the server
+	 * The server will first check if this is a command, and interprets it.
+	 *
+	 * @param message the message to send
+	 * @return true
+	 */
+	public boolean sendNewMessage(DataMessage message) {
 		this.server.addMessage(message);
+		return true;
 	}
 
-	public void actionLogin(String username) {
+	/**
+	 * Tries to login the given username to the server.
+	 * This sends a ServerMessageConnectionError to the client if
+	 * he cannot connect with this name.
+	 *
+	 * @param username the name of the user
+	 * @return true if the user was able to login, false otherwise.
+	 */
+	public boolean actionLogin(String username) {
 
 		try {
 			// check the username is not already taken
 			if(this.server.usernameAlreadyTaken(username)) {
 					this.send(new ServerMessageConnectionError("Ce pseudo déjà prit, ou le serveur en a empêché l'utilisation !"));
 					this.server.removeClient(this);
+					return false;
 			}
 
 			// check the username is not null
 			if(username.trim().length() == 0) {
 				this.send(new ServerMessageConnectionError("Pseudo invalide !"));
 				this.server.removeClient(this);
+				return false;
 			}
 
 			// check the username length
 			if(username.length() > 20) {
 				this.send(new ServerMessageConnectionError("Pseudo trop long !"));
 				this.server.removeClient(this);
+				return false;
 			}
 		}
 		catch(IOException e) {
 			actionLogout();
+			return false;
 		}
-
+		return true;
 	}
 
-	public void actionLogout() {
+	/**
+	 * Logouts the client of the server.
+	 *
+	 * @return true
+	 */
+	public boolean actionLogout() {
 		// the client wants to log out
 		this.server.removeClient(this);
 		this.server.sendUserList();
 		this.sendGoodbyeMessage();
+		return true;
 	}
 
 }

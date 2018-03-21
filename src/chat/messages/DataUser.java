@@ -55,10 +55,21 @@ public class DataUser implements Serializable {
 		return this.color;
 	}
 
+	/**
+	 * Sets the color of the user
+	 *
+	 * @param c the new color
+	 */
 	public void setColor(Color c) {
 		this.color = c;
 	}
 
+	/**
+	 * Sets the color of the user, from an integer
+	 * containing the three color components
+	 *
+	 * @param c the new color
+	 */
 	public void setColor(int c) {
 		int r = (c & 0xFF0000) >> 16;
 		int g = (c & 0x00FF00) >> 8;
@@ -72,6 +83,12 @@ public class DataUser implements Serializable {
 		}
 	}
 
+	/**
+	 * Sets the color of the user, from String
+	 * like "#rrbbgg"
+ 	 *
+	 * @param hexColor the new color
+	 */
 	public void setColor(String hexColor) {
 		this.setColor(Integer.decode(hexColor));
 	}

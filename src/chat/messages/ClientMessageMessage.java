@@ -36,11 +36,17 @@ public class ClientMessageMessage extends ClientMessage {
 		return toString(message);
 	}
 
-	public void action(ClientThread clientThread) {
+	/**
+	 * The action to be done when the server wants to execute the message
+	 *
+	 * @param clientThread the thread that received this message
+	 */
+	public boolean action(ClientThread clientThread) {
 		if(message.length() > 0) {
 			// the client sent a new message
-			clientThread.sendNewMessage(new DataMessage(clientThread.getUser(), this.message));
+			return clientThread.sendNewMessage(new DataMessage(clientThread.getUser(), this.message));
 		}
+		return false;
 	}
 
 }

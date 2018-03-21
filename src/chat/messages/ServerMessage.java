@@ -8,12 +8,10 @@ import chat.client.ActionsMessages;
 
 public abstract class ServerMessage extends Message {
 
-	// nothing to do here
-
 	/**
 	 * Do the client action when there this message
 	 *
-	 * @param actions the ActionsMessages object
+	 * @param action the ActionsMessages object
 	 */
 	abstract public void action(ActionsMessages action);
 

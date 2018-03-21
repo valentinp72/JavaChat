@@ -10,8 +10,18 @@ import chat.messages.DataMessageInfo;
 import chat.messages.DataMessage;
 import chat.messages.ServerMessage;
 
+/**
+ * This class represents a command listing to the user all the available commands.
+ */
+
 public class CommandHelp extends Command {
 
+	/**
+	 * Execute the command on the server.
+	 *
+	 * @param original the message containing the command
+	 * @return PAS_ERREUR
+	 */
 	public String execute(Server server, DataMessage original) {
 
 		ClientThread sender;
@@ -34,6 +44,11 @@ public class CommandHelp extends Command {
 		return PAS_ERREUR;
 	}
 
+	/**
+	 * Returns the content of the help to display
+	 *
+	 * @return the content
+	 */
 	public String content() {
 
 		String[] commandes = {"help", "msg", "info", "color", "emojis"};
@@ -48,6 +63,12 @@ public class CommandHelp extends Command {
 		return s;
 	}
 
+	/**
+	 * Returns an information about a given command.
+	 *
+	 * @param command the command to retreive the information
+	 * @return an information
+	 */
 	public String infoCommand(String command) {
 		switch(command) {
 			case "help":
@@ -66,6 +87,11 @@ public class CommandHelp extends Command {
 		}
 	}
 
+	/**
+	 * Returns the usage of the current command.
+	 *
+	 * @return the usage of the command
+	 */
 	public String usage() {
 		return super.usage() + "help";
 	}

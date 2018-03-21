@@ -11,11 +11,16 @@ public class ClientMessageLogout extends ClientMessage {
 	 * Instantiates a new client message logout.
 	 */
 	public ClientMessageLogout() {
-
+		// nothing
 	}
 
-	public void action(ClientThread clientThread) {
-		clientThread.actionLogout();
+	/**
+	 * The action to be done when the server wants to execute the message
+	 *
+	 * @param clientThread the thread that received this message
+	 */
+	public boolean action(ClientThread clientThread) {
+		return clientThread.actionLogout();
 	}
 
 }

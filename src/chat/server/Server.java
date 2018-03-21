@@ -174,6 +174,9 @@ public class Server {
 
 			Command c;
 
+			// ça pourrait être clean un peu, mais je sais pas trop comment
+			// faire. probablement utiliser une classe utilitaire qui s'occupe
+			// the faire le switch ?
 			switch(command) {
 				case "msg":
 					c = new CommandMsg();
@@ -206,6 +209,12 @@ public class Server {
 		return false;
 	}
 
+	/**
+	 * Sends an error to the client with the given username
+	 *
+	 * @param error the error to send
+	 * @param username to username of the user we want the message to send to
+	 */
 	public void sendErrorMessage(String error, String username) {
 		ClientThread dest = getClientByName(username);
 		DataMessage   msg = new DataMessageInfo(ADMIN_USER, "Erreur " + error);
@@ -241,7 +250,14 @@ public class Server {
 		}
 	}
 
-	public ClientThread getClientByName(String username) {
+	/**
+	 * Get a ClientThread by the name of the his username
+	 *
+	 * @param username the username to search for
+	 * @return the ClientThread corresponding to that username
+	 * @throws IllegalArgumentException if the username is not connected
+	 */
+	public ClientThread getClientByName(String username) throws IllegalArgumentException {
 		for(ClientThread client : clients) {
 			if(client.getUser().getUsername().equals(username)) {
 				return client;

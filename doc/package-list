@@ -2,3 +2,4 @@ chat.client
 chat.client.ui
 chat.messages
 chat.server
+chat.server.command

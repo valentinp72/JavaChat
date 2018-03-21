@@ -14,5 +14,8 @@ server: serveur
 serveur:
 	java -classpath bin/ chat.server.Application
 
+documentation:
+	javadoc -sourcepath ./src -d ./doc -subpackages .
+
 clean:
 	find . -type f -name '*.class' -delete

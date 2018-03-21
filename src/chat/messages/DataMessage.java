@@ -68,35 +68,32 @@ public class DataMessage implements Serializable {
 		return this.message;
 	}
 
+	/**
+	 * Sets the message of the current DataMessage
+	 *
+	 * @param message the new message
+	 */
 	public void setMessage(String message) {
 		this.message = message;
 	}
 
+	/**
+	 * Replaces emojis in the message with unicode ones
+	 */
 	public void replaceEmojis() {
 		String s = this.getMessage();
-
-		/*s = s.replaceAll(":\\)",       "\ud83d\ude00");
-		s = s.replaceAll(";\\)",       "\ud83d\ude09");
-		s = s.replaceAll(":grinning:", "\ud83d\ude00");
-		s = s.replaceAll(":grin:",     "\ud83d\ude01");
-
-		s = s.replaceAll(":sunglasses:", "\ud83d\ude0e");
-		s = s.replaceAll(":joy:",      "\ud83d\ude02");
-
-		s = s.replaceAll("!", "😀");*/
 
 		for(Map.Entry<String, String> pair : emojis.entrySet()) {
 			String toReplace   = pair.getKey();
 			String replacement = pair.getValue();
 
 			// replace the emojis with the corresponding emoji
-			s = s.replaceAll("(?<!!)" + Pattern.quote(toReplace), replacement);
+			s = s.replaceAll("(?<!:)" + Pattern.quote(toReplace), replacement);
 
 			// now remove the emojis that started with !
-			s = s.replaceAll("!" + Pattern.quote(toReplace), toReplace);
+			s = s.replaceAll(":" + Pattern.quote(toReplace), toReplace);
 
 		}
-
 
 		this.setMessage(s);
 	}
@@ -119,20 +116,31 @@ public class DataMessage implements Serializable {
 		return this.dformat.format(this.time);
 	}
 
+	/**
+	 * Returns the map of emojis and shortcuts
+	 *
+	 * @return the map with all the shortcuts as the key and the unicode emojis as the emojis.
+	 */
 	public static Map<String, String> getEmojis() {
 		return emojis;
 	}
 
+	/**
+	 * Defines emojis and shortcuts to them
+	 */
 	static {
 
 		// http://www.fileformat.info/info/unicode/block/emoticons/list.htm
 		emojis = new HashMap<String, String>();
 
-		emojis.put(":)", "😃");
+		emojis.put(":)", "😊");
+		emojis.put(":D", "😃");
 		emojis.put(";)", "😉");
 		emojis.put(":|", "😑");
 		emojis.put(":/", "😕");
 		emojis.put(":p", "😛");
+		emojis.put(":X", "😝");
+		emojis.put("oO", "😲");
 
 		emojis.put(":laughing:",         "😆");
 		emojis.put(":smiley:",           "😃");
@@ -149,8 +157,27 @@ public class DataMessage implements Serializable {
 		emojis.put(":confused:",         "😕");
 		emojis.put(":stuck_out_tongue:", "😛");
 		emojis.put(":expressionless:",   "😑");
+		emojis.put(":sleeping:",         "😴");
+		emojis.put(":cold_sweat:",       "😰");
+		emojis.put(":scream:",           "😱");
+		emojis.put(":astonished:",       "😲");
+		emojis.put(":raised_hands:",     "🙌");
+		emojis.put(":rage:",             "😡");
 		emojis.put(":smiling_imp:",      "😈");
 
+		emojis.put(":see_no_evil:",      "🙈");
+		emojis.put(":hear_no_evil:",     "🙉");
+		emojis.put(":speak_no_evil:",    "🙊");
+
+		emojis.put(":smile_cat:",        "😸");
+		emojis.put(":joy_cat:",          "😹");
+		emojis.put(":smiley_cat:",       "😺");
+		emojis.put(":heart_eyes_cat:",   "😻");
+		emojis.put(":smirk_cat:",        "😼");
+		emojis.put(":kissing_cat:",      "😽");
+		emojis.put(":pouting_cat:",      "😾");
+		emojis.put(":crying_cat_face:",  "😿");
+		emojis.put(":scream_cat:",       "🙀");
 
 	}
 

@@ -22,12 +22,15 @@ import chat.messages.DataMessage;
 
 public class WrapTableCellRenderer extends JTextArea implements TableCellRenderer {
 
+	/**
+	 * The font to use when displaying messages
+	 */
 	public static Font FONT;
 
 	static {
+		/* We load a font that allow unicode emojis */
 		try {
 			FONT = Font.createFont(Font.TRUETYPE_FONT, new File("resources/font/OpenSansEmoji.ttf")).deriveFont(14f);
-			// FONT = new Font("Arial Unicode", Font.PLAIN, 12);
 		}
 		catch(FontFormatException e) {
 			System.out.println("Invalid font! Emojis won't work");
