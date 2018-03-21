@@ -1,5 +1,6 @@
 package chat.client.ui;
 
+import java.awt.Dimension;
 import java.awt.BorderLayout;
 import java.io.IOException;
 import java.net.UnknownHostException;
@@ -43,6 +44,7 @@ public class MainWindow extends JFrame {
 
 		this.setTitle("Chat");
 		this.setSize(800, 500);
+		this.setMinimumSize(new Dimension(540, 300));
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -106,17 +108,17 @@ public class MainWindow extends JFrame {
 					JOptionPane.showMessageDialog(
 						new JFrame(),
 						error,
-						"Dialog",
+						"Erreur",
 						JOptionPane.ERROR_MESSAGE
 					);
 				}
 			});
 		}
 		catch(UnknownHostException e) {
-			return "Unknown host!";
+			return "Hôte inconnu !";
 		}
 		catch(IOException e) {
-			return "Internet connection error!";
+			return "Impossible de se connecter au serveur indiqué...";
 		}
 		return "OK";
 	}

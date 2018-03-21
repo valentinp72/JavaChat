@@ -3,6 +3,7 @@ package chat.client.ui;
 import java.io.File;
 import java.io.IOException;
 
+import java.awt.Insets;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.Color;
@@ -46,6 +47,7 @@ public class WrapTableCellRenderer extends JTextArea implements TableCellRendere
 	public WrapTableCellRenderer() {
 		this.setLineWrap(true);
 		this.setWrapStyleWord(true);
+		this.setMargin(new Insets(0, 0, 2, 0));
 	}
 
 	/**

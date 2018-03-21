@@ -60,17 +60,21 @@ public class MessagesTableModel extends AbstractTableModel {
 	 * @return the value at the given coordinates in the table.
 	 */
 	public Object getValueAt(int row, int column) {
-		DataMessage message = this.messages.get(row);
-
-		switch(column) {
-			case 0:
-				return message.getUser().toString();
-			case 1:
-				return message.getMessage();
-			case 2:
-				return message.getTime();
-			default:
-				return "Erreur !";
+		try {
+			DataMessage message = this.messages.get(row);
+			switch(column) {
+				case 0:
+					return message.getUser().toString();
+				case 1:
+					return message.getMessage();
+				case 2:
+					return message.getTime();
+				default:
+					return "Erreur !";
+			}
+		}
+		catch (Exception e) {
+			return "Erreur !";
 		}
 	}
 

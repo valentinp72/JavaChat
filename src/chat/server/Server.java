@@ -1,6 +1,8 @@
 package chat.server;
 
 import java.io.IOException;
+import java.net.BindException;
+import java.net.UnknownHostException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -66,11 +68,10 @@ public class Server {
 	/**
 	 * Instantiates a new server.
 	 */
-	public Server() {
-		try {
+	public Server(String host, int port) throws BindException,UnknownHostException,IOException {
 			// default configuration
-			this.host     = "127.0.0.1";
-			this.port     = 5890;
+			this.host     = host;
+			this.port     = port;
 			this.clients  = new ArrayList<ClientThread>();
 			this.messages = new ArrayList<DataMessage>();
 
@@ -78,13 +79,7 @@ public class Server {
 			this.server = new ServerSocket(port, 100, InetAddress.getByName(host));
 			System.out.println("fait!");
 
-
 			this.addMessage(DEFAULT_MESSAGE);
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-		}
-
 	}
 
 	/**

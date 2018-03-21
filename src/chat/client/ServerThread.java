@@ -1,5 +1,6 @@
 package chat.client;
 
+import java.io.EOFException;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.SocketException;
@@ -38,9 +39,9 @@ public class ServerThread implements Runnable {
 		this.socket  = socket;
 		this.client  = client;
 
+		this.running = true;
 		this.thread  = new Thread(this);
 		this.thread.start();
-		this.running = true;
 	}
 
 	/**
@@ -82,11 +83,15 @@ public class ServerThread implements Runnable {
 					}
 					*/
 
+
 				}
 				catch(SocketException e) {
 					thread.currentThread().interrupt();
 				}
 			}
+		}
+		catch(EOFException e) {
+			this.client.getActionsMessages().connectionError("La connexion avec le server a été coupée");
 		}
 		catch(IOException e) {
 			e.printStackTrace();

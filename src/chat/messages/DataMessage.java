@@ -134,6 +134,7 @@ public class DataMessage implements Serializable {
 		emojis = new HashMap<String, String>();
 
 		emojis.put(":)", "😊");
+		emojis.put(":(", "😟");
 		emojis.put(":D", "😃");
 		emojis.put(";)", "😉");
 		emojis.put(":|", "😑");

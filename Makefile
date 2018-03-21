@@ -6,13 +6,11 @@ all:
 
 build: all
 
-client:
+clientStart:
 	java -classpath bin/ chat.client.Application
 
-server: serveur
-
-serveur:
-	java -classpath bin/ chat.server.Application
+serverStart:
+	java -classpath bin/ chat.server.Application ${ARGS}
 
 documentation:
 	javadoc -sourcepath ./src -d ./doc -subpackages .
